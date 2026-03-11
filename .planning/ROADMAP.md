@@ -1,4 +1,4 @@
-﻿# Roadmap: Calcolatrice Lievitazione
+# Roadmap: Calcolatrice Lievitazione
 
 **Created:** 2026-03-11
 **Phases:** 6
@@ -12,7 +12,7 @@
 | 2 | Domain Calculation Engine | Implement the empirical model, normalization, validation primitives, and trustworthy numerical behavior. | SAFE-02, SAFE-03 | Complete (2026-03-11) |
 | 3 | Interactive Calculator Flow | Deliver the live calculator experience with robust input handling, presets, reset, and reliable result orchestration. | CALC-01, CALC-02, CALC-03, CALC-04, CALC-05, SAFE-01 | Complete (2026-03-11) |
 | 03.1 | Empirical Model Realignment | Realign the active empirical model against defendable fixtures while preserving the calculator contract and mono-model UX. | MODEL-01, MODEL-02 | Complete (2026-03-11) |
-| 4 | Trust-Centered Premium Presentation | Make the tool feel premium, understandable, and honest through layout, copy, formula visibility, and polished interaction. | TRAN-01, TRAN-02, TRAN-03, UX-01, UX-02, UX-03 | Planned |
+| 4 | Trust-Centered Premium Presentation | Make the tool feel premium, understandable, and honest through layout, copy, formula visibility, and polished interaction. | TRAN-01, TRAN-02, TRAN-03, UX-01, UX-02, UX-03 | Complete (2026-03-11) |
 | 5 | Experimental Modifier Seam | Add the advanced section and future-facing modifier architecture without contaminating the active MVP math. | EXP-01, EXP-02 | Planned |
 
 ## Phase Details
@@ -120,6 +120,10 @@ Complete on 2026-03-11.
 
 Make the tool feel premium, understandable, and honest through layout, copy, formula visibility, and polished interaction.
 
+**Status**
+
+Complete on 2026-03-11.
+
 **Requirements**
 
 - TRAN-01
@@ -136,6 +140,10 @@ Make the tool feel premium, understandable, and honest through layout, copy, for
 3. The result card summarizes active parameters, warnings, and estimator context in a way that supports trust rather than pseudo-science.
 4. Motion is subtle and supports orientation only; it does not delay or obscure critical information.
 5. Visual and interaction details align with the requested premium, sober, editorial product direction.
+
+**Plans**
+
+- [x] 04-01 - Premium homepage presentation with explicit transparency surfaces, richer trust context, and accessibility-backed regression coverage.
 
 ### Phase 5: Experimental Modifier Seam
 
@@ -184,4 +192,4 @@ Add the advanced section and future-facing modifier architecture without contami
 **Coverage result:** 20 of 20 v1 requirements are mapped to exactly one phase.
 
 ---
-*Last updated: 2026-03-11 after phase 03.1 completion*
+*Last updated: 2026-03-11 after phase 4 completion*

@@ -1,4 +1,4 @@
-﻿# Requirements: Calcolatrice Lievitazione
+# Requirements: Calcolatrice Lievitazione
 
 **Defined:** 2026-03-11
 **Core Value:** Offrire una stima pratica del lievito fresco che sia immediata, chiara, credibile e abbastanza affidabile da poter essere usata davvero come riferimento operativo.
@@ -26,15 +26,15 @@
 
 ### Model Transparency
 
-- [ ] **TRAN-01**: Utente puo vedere la formula base del modello empirico e capire quali variabili usa.
-- [ ] **TRAN-02**: Utente vede un disclaimer chiaro che spiega che il risultato e una stima pratica, non una verita assoluta.
-- [ ] **TRAN-03**: Utente vede un riepilogo leggibile dei parametri attivi e dello stato dei correttivi sperimentali.
+- [x] **TRAN-01**: Utente puo vedere la formula base del modello empirico e capire quali variabili usa.
+- [x] **TRAN-02**: Utente vede un disclaimer chiaro che spiega che il risultato e una stima pratica, non una verita assoluta.
+- [x] **TRAN-03**: Utente vede un riepilogo leggibile dei parametri attivi e dello stato dei correttivi sperimentali.
 
 ### Experience and Presentation
 
-- [ ] **UX-01**: Utente usa il tool con una UI premium, leggibile e coerente sia su mobile sia su desktop.
-- [ ] **UX-02**: Utente distingue chiaramente area input, area risultato, dettagli del modello e sezione avanzata senza confusione visiva.
-- [ ] **UX-03**: Utente percepisce un'interazione rapida e stabile con micro-animazioni discrete che non ostacolano la lettura.
+- [x] **UX-01**: Utente usa il tool con una UI premium, leggibile e coerente sia su mobile sia su desktop.
+- [x] **UX-02**: Utente distingue chiaramente area input, area risultato, dettagli del modello e sezione avanzata senza confusione visiva.
+- [x] **UX-03**: Utente percepisce un'interazione rapida e stabile con micro-animazioni discrete che non ostacolano la lettura.
 
 ### Experimental Extension Seam
 
@@ -86,12 +86,12 @@
 | SAFE-01 | Phase 3 | Complete |
 | MODEL-01 | Phase 03.1 | Complete |
 | MODEL-02 | Phase 03.1 | Complete |
-| TRAN-01 | Phase 4 | Pending |
-| TRAN-02 | Phase 4 | Pending |
-| TRAN-03 | Phase 4 | Pending |
-| UX-01 | Phase 4 | Pending |
-| UX-02 | Phase 4 | Pending |
-| UX-03 | Phase 4 | Pending |
+| TRAN-01 | Phase 4 | Complete |
+| TRAN-02 | Phase 4 | Complete |
+| TRAN-03 | Phase 4 | Complete |
+| UX-01 | Phase 4 | Complete |
+| UX-02 | Phase 4 | Complete |
+| UX-03 | Phase 4 | Complete |
 | EXP-01 | Phase 5 | Pending |
 | EXP-02 | Phase 5 | Pending |
 
@@ -99,8 +99,8 @@
 - v1 requirements: 20 total
 - Mapped to phases: 20
 - Unmapped: 0
-- Completed: 12
+- Completed: 18
 
 ---
 *Requirements defined: 2026-03-11*
-*Last updated: 2026-03-11 after phase 03.1 completion*
+*Last updated: 2026-03-11 after phase 4 completion*
