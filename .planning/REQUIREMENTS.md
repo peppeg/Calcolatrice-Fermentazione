@@ -1,4 +1,4 @@
-# Requirements: Calcolatrice Lievitazione
+﻿# Requirements: Calcolatrice Lievitazione
 
 **Defined:** 2026-03-11
 **Core Value:** Offrire una stima pratica del lievito fresco che sia immediata, chiara, credibile e abbastanza affidabile da poter essere usata davvero come riferimento operativo.
@@ -18,6 +18,11 @@
 - [x] **SAFE-01**: Utente riceve messaggi chiari per input vuoti, non validi, negativi o pari a zero e il risultato viene sospeso in modo pulito quando l'input non e calcolabile.
 - [x] **SAFE-02**: Utente riceve un warning non bloccante quando usa il modello fuori dall'intervallo empirico di riferimento.
 - [x] **SAFE-03**: Utente vede valori arrotondati in modo pratico per uso reale, senza falsa precisione.
+
+### Model Integrity
+
+- [ ] **MODEL-01**: Il modello attivo v1 e calibrato contro fixture esplicite e tolleranze dichiarate per l'uso standard a temperatura ambiente, cosi la sorgente numerica resta difendibile e non dipende da una formula storica non verificata.
+- [ ] **MODEL-02**: Il riallineamento del modello preserva il contratto di calcolo, i warning non bloccanti, l'andamento monotono del risultato e l'assenza di cliff evidenti nell'intervallo supportato.
 
 ### Model Transparency
 
@@ -79,6 +84,8 @@
 | CALC-04 | Phase 3 | Complete |
 | CALC-05 | Phase 3 | Complete |
 | SAFE-01 | Phase 3 | Complete |
+| MODEL-01 | Phase 03.1 | Pending |
+| MODEL-02 | Phase 03.1 | Pending |
 | TRAN-01 | Phase 4 | Pending |
 | TRAN-02 | Phase 4 | Pending |
 | TRAN-03 | Phase 4 | Pending |
@@ -89,11 +96,11 @@
 | EXP-02 | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 18 total
-- Mapped to phases: 18
+- v1 requirements: 20 total
+- Mapped to phases: 20
 - Unmapped: 0
 - Completed: 10
 
 ---
 *Requirements defined: 2026-03-11*
-*Last updated: 2026-03-11 after phase 3 completion*
+*Last updated: 2026-03-11 after planning phase 03.1*

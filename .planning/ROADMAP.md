@@ -1,8 +1,8 @@
-# Roadmap: Calcolatrice Lievitazione
+﻿# Roadmap: Calcolatrice Lievitazione
 
 **Created:** 2026-03-11
 **Phases:** 6
-**v1 requirements mapped:** 18 / 18
+**v1 requirements mapped:** 20 / 20
 
 ## Roadmap Summary
 
@@ -11,6 +11,7 @@
 | 1 | Foundation and Quality Baseline | Create the technical baseline, repository discipline, and automated quality gates for a serious v1. | ENG-01, ENG-02 | Complete (2026-03-11) |
 | 2 | Domain Calculation Engine | Implement the empirical model, normalization, validation primitives, and trustworthy numerical behavior. | SAFE-02, SAFE-03 | Complete (2026-03-11) |
 | 3 | Interactive Calculator Flow | Deliver the live calculator experience with robust input handling, presets, reset, and reliable result orchestration. | CALC-01, CALC-02, CALC-03, CALC-04, CALC-05, SAFE-01 | Complete (2026-03-11) |
+| 03.1 | Empirical Model Realignment | Realign the active empirical model against defendable fixtures while preserving the calculator contract and mono-model UX. | MODEL-01, MODEL-02 | Planned |
 | 4 | Trust-Centered Premium Presentation | Make the tool feel premium, understandable, and honest through layout, copy, formula visibility, and polished interaction. | TRAN-01, TRAN-02, TRAN-03, UX-01, UX-02, UX-03 | Planned |
 | 5 | Experimental Modifier Seam | Add the advanced section and future-facing modifier architecture without contaminating the active MVP math. | EXP-01, EXP-02 | Planned |
 
@@ -83,15 +84,31 @@ Deliver the live calculator experience with robust input handling, presets, rese
 4. Presets update only the intended values, and reset restores the full initial state including advanced-panel state.
 5. Integration tests verify the default render, live updates, presets, reset, and invalid-state handling.
 
-### Phase 03.1: Empirical Model Realignment (INSERTED)
+### Phase 03.1: Empirical Model Realignment
 
-**Goal:** [Urgent work - to be planned]
-**Requirements**: TBD
-**Depends on:** Phase 3
-**Plans:** 0 plans
+**Goal**
 
-Plans:
-- [ ] TBD (run /gsd:plan-phase 03.1 to break down)
+Realign the active empirical model against defendable fixtures while preserving the calculator contract and mono-model UX.
+
+**Status**
+
+Planned on 2026-03-11.
+
+**Requirements**
+
+- MODEL-01
+- MODEL-02
+
+**Success criteria**
+
+1. The repository contains a defendable calibration fixture corpus and explicit acceptance tolerances for the active ambient-use model.
+2. The phase makes an evidence-based choice between coefficient retuning and a simple piecewise time family, instead of relying on ad hoc formula tweaks.
+3. `calculateFreshYeast` keeps the existing calculation contract, warning semantics, and output structure used by the current UI.
+4. Regression coverage proves model fit, monotonic behavior, continuity when needed, and live calculator compatibility.
+
+**Plans**
+
+- [ ] 03.1-01 - Fixture-led model realignment with retune-first decision gate and contract-preserving regression coverage.
 
 ### Phase 4: Trust-Centered Premium Presentation
 
@@ -149,6 +166,8 @@ Add the advanced section and future-facing modifier architecture without contami
 | CALC-04 | Phase 3 |
 | CALC-05 | Phase 3 |
 | SAFE-01 | Phase 3 |
+| MODEL-01 | Phase 03.1 |
+| MODEL-02 | Phase 03.1 |
 | TRAN-01 | Phase 4 |
 | TRAN-02 | Phase 4 |
 | TRAN-03 | Phase 4 |
@@ -158,7 +177,7 @@ Add the advanced section and future-facing modifier architecture without contami
 | EXP-01 | Phase 5 |
 | EXP-02 | Phase 5 |
 
-**Coverage result:** 18 of 18 v1 requirements are mapped to exactly one phase.
+**Coverage result:** 20 of 20 v1 requirements are mapped to exactly one phase.
 
 ---
-*Last updated: 2026-03-11 after inserting phase 03.1*
+*Last updated: 2026-03-11 after planning phase 03.1*
