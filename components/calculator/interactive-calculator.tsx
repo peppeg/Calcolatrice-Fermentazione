@@ -1,7 +1,10 @@
-ï»¿'use client';
+'use client';
 
 import { useState } from 'react';
-import { CalculatorResultPanel, type CalculatorResultState } from '@/components/calculator/calculator-result-panel';
+import {
+  CalculatorResultPanel,
+  type CalculatorResultState,
+} from '@/components/calculator/calculator-result-panel';
 import { calculateFreshYeast } from '@/lib/calc/calculate-fresh-yeast';
 import {
   createInitialCalculatorDraft,
@@ -11,35 +14,51 @@ import {
   type CalculatorDraft,
 } from '@/lib/calc/calculator-draft';
 import { roundPracticalYeast } from '@/lib/calc/rounding';
-import type { CalculationResult, ValidationField } from '@/lib/calc/types';
+import type { CalculationResult, NormalizedCalculatorInput, ValidationField } from '@/lib/calc/types';
 import { convertFreshToDryYeastGrams } from '@/lib/calc/yeast-conversions';
 
 const PRESETS = [
   {
     id: 'calmo',
     label: 'Calma da cucina',
-    description: '20Ã‚Â°C Ã‚Â· 12 h',
+    description: '20 °C · 12 h',
     temperatureC: '20',
     timeHours: '12',
   },
   {
     id: 'rapido',
     label: 'Impasto piu rapido',
-    description: '26Ã‚Â°C Ã‚Â· 6 h',
+    description: '26 °C · 6 h',
     temperatureC: '26',
     timeHours: '6',
   },
   {
     id: 'lento',
     label: 'Lungo e fresco',
-    description: '18Ã‚Â°C Ã‚Â· 18 h',
+    description: '18 °C · 18 h',
     temperatureC: '18',
     timeHours: '18',
   },
 ] as const;
 
+const BODY_FONT = '"Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif';
+
 type TouchedFields = Partial<Record<ValidationField, boolean>>;
 type FieldErrors = Partial<Record<ValidationField, string>>;
+
+function formatCompactNumber(value: number): string {
+  return new Intl.NumberFormat('it-IT', {
+    maximumFractionDigits: value % 1 === 0 ? 0 : 2,
+    minimumFractionDigits: 0,
+  }).format(value);
+}
+
+function formatFlourSummary(input: NormalizedCalculatorInput): string {
+  const value = formatCompactNumber(input.flourValue);
+  const unitLabel = input.flourUnit === 'kg' ? 'kg' : 'g';
+
+  return `${value} ${unitLabel}`;
+}
 
 function buildGuidanceSummary(missingFields: ValidationField[]) {
   return `Per vedere la stima, completa ${formatCalculatorFieldList(missingFields)}.`;
@@ -95,7 +114,7 @@ function buildResultState({
   if (missingFields.length > 0) {
     return {
       variant: 'guidance',
-      title: 'Risultato sospeso',
+      title: 'Stima in attesa',
       summary: buildGuidanceSummary(missingFields),
       items: missingFields.map((field) => getCalculatorFieldLabel(field)),
     };
@@ -120,19 +139,43 @@ function buildResultState({
   }
 
   if (calculationResult?.status === 'ok') {
+    const { normalizedInput } = calculationResult;
+
     return {
       variant: 'success',
       title: 'Stima attuale',
-      summary: 'La stima si aggiorna in tempo reale sui valori che stai inserendo.',
+      summary: 'Lettura live del modello ambiente v1 sullo scenario che stai compilando.',
       gramsForRecipe: calculationResult.gramsForRecipe,
-      dryYeastForRecipe: roundPracticalYeast(convertFreshToDryYeastGrams(calculationResult.gramsForRecipe)),
+      dryYeastForRecipe: roundPracticalYeast(
+        convertFreshToDryYeastGrams(calculationResult.gramsForRecipe),
+      ),
+      scenarioItems: [
+        {
+          label: 'Temperatura',
+          value: `${formatCompactNumber(normalizedInput.temperatureC)} °C`,
+        },
+        {
+          label: 'Tempo',
+          value: `${formatCompactNumber(normalizedInput.timeHours)} h`,
+        },
+        {
+          label: 'Farina',
+          value: formatFlourSummary(normalizedInput),
+        },
+      ],
+      estimatorName: 'Modello empirico ambiente v1',
+      estimatorNote: 'Usa temperatura e tempo per stimare il lievito; la farina scala solo il risultato finale.',
+      modifierStatus:
+        calculationResult.appliedModifiers.length > 0
+          ? calculationResult.appliedModifiers.join(', ')
+          : 'Correttivi sperimentali inattivi nella v1.',
       warning: calculationResult.warnings[0]?.message ?? null,
     };
   }
 
   return {
     variant: 'guidance',
-    title: 'Risultato sospeso',
+    title: 'Stima in attesa',
     summary: buildGuidanceSummary(['temperatureC', 'timeHours', 'flourValue']),
     items: ['temperatura ambiente', 'tempo di lievitazione', 'quantita di farina'],
   };
@@ -202,17 +245,22 @@ export function InteractiveCalculator() {
   }
 
   return (
-    <div className="grid gap-5 lg:grid-cols-[minmax(0,1.1fr)_minmax(22rem,0.9fr)] lg:items-start">
-      <section className="space-y-4 rounded-[2rem] border border-stone-200/70 bg-white/95 p-5 shadow-[0_24px_60px_-36px_rgba(41,37,36,0.55)]">
-        <div className="space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">Input essenziali</p>
-          <h2 className="text-2xl font-semibold tracking-tight text-stone-950">Compila e leggi la stima</h2>
-          <p className="text-sm leading-6 text-stone-600">
-            Nessun submit: il risultato reagisce subito a temperatura, tempo e farina.
+    <div className="grid gap-5 lg:grid-cols-[minmax(0,1.08fr)_minmax(21.5rem,0.92fr)] lg:items-start">
+      <section className="space-y-5 rounded-[2.3rem] border border-white/65 bg-white/86 p-5 shadow-[0_26px_80px_-44px_rgba(41,37,36,0.5)] backdrop-blur sm:p-6">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">
+            Input essenziali
+          </p>
+          <h2 className="text-2xl font-semibold tracking-tight text-stone-950">
+            Compila lo scenario, leggi subito la stima
+          </h2>
+          <p className="max-w-2xl text-sm leading-6 text-stone-600">
+            Nessun submit e nessun pannello superfluo: il risultato reagisce subito a temperatura,
+            tempo e farina.
           </p>
         </div>
 
-        <div className="space-y-3">
+        <div className="rounded-[1.8rem] border border-stone-200/80 bg-stone-950/[0.03] p-4">
           <div className="flex flex-wrap gap-2">
             {PRESETS.map((preset) => {
               const selected = selectedPresetId === preset.id;
@@ -222,32 +270,32 @@ export function InteractiveCalculator() {
                   key={preset.id}
                   type="button"
                   className={selected
-                    ? 'rounded-full border border-stone-900 bg-stone-900 px-4 py-2 text-sm font-medium text-stone-50'
-                    : 'rounded-full border border-stone-200 bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700 transition hover:border-stone-300 hover:bg-stone-200'}
+                    ? 'rounded-full border border-stone-900 bg-stone-900 px-4 py-2 text-sm font-medium text-stone-50 transition duration-200'
+                    : 'rounded-full border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-700 transition duration-200 hover:border-stone-300 hover:bg-stone-100'}
                   onClick={() => applyPreset(preset)}
                 >
                   {preset.label}
-                  <span className="ml-2 text-xs opacity-80">{preset.description}</span>
+                  <span className="ml-2 text-xs opacity-75">{preset.description}</span>
                 </button>
               );
             })}
           </div>
           <button
             type="button"
-            className="text-sm font-medium text-stone-600 underline underline-offset-4 transition hover:text-stone-900"
+            className="mt-3 text-sm font-medium text-stone-600 underline underline-offset-4 transition duration-200 hover:text-stone-900"
             onClick={resetCalculator}
           >
             Reset completo
           </button>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2" style={{ fontFamily: BODY_FONT }}>
           <label className="space-y-2">
-            <span className="text-sm font-medium text-stone-700">Temperatura ambiente (Ã‚Â°C)</span>
+            <span className="text-sm font-medium text-stone-700">Temperatura ambiente (°C)</span>
             <input
               aria-describedby={fieldErrors.temperatureC ? 'temperature-error' : undefined}
               aria-invalid={Boolean(fieldErrors.temperatureC)}
-              className="w-full rounded-[1.25rem] border border-stone-200 bg-stone-50 px-4 py-3 text-base text-stone-950 outline-none transition focus:border-stone-400"
+              className="w-full rounded-[1.3rem] border border-stone-200 bg-stone-50/85 px-4 py-3 text-base text-stone-950 outline-none transition duration-200 focus:border-amber-500 focus:bg-white"
               inputMode="decimal"
               name="temperatureC"
               placeholder="Es. 24"
@@ -268,7 +316,7 @@ export function InteractiveCalculator() {
             <input
               aria-describedby={fieldErrors.timeHours ? 'time-error' : undefined}
               aria-invalid={Boolean(fieldErrors.timeHours)}
-              className="w-full rounded-[1.25rem] border border-stone-200 bg-stone-50 px-4 py-3 text-base text-stone-950 outline-none transition focus:border-stone-400"
+              className="w-full rounded-[1.3rem] border border-stone-200 bg-stone-50/85 px-4 py-3 text-base text-stone-950 outline-none transition duration-200 focus:border-amber-500 focus:bg-white"
               inputMode="decimal"
               name="timeHours"
               placeholder="Es. 8"
@@ -289,7 +337,7 @@ export function InteractiveCalculator() {
             <input
               aria-describedby={fieldErrors.flourValue ? 'flour-error' : undefined}
               aria-invalid={Boolean(fieldErrors.flourValue)}
-              className="w-full rounded-[1.25rem] border border-stone-200 bg-stone-50 px-4 py-3 text-base text-stone-950 outline-none transition focus:border-stone-400"
+              className="w-full rounded-[1.3rem] border border-stone-200 bg-stone-50/85 px-4 py-3 text-base text-stone-950 outline-none transition duration-200 focus:border-amber-500 focus:bg-white"
               inputMode="decimal"
               name="flourValue"
               placeholder="Es. 500"
@@ -308,7 +356,7 @@ export function InteractiveCalculator() {
           <label className="space-y-2">
             <span className="text-sm font-medium text-stone-700">Unita farina</span>
             <select
-              className="w-full rounded-[1.25rem] border border-stone-200 bg-stone-50 px-4 py-3 text-base text-stone-950 outline-none transition focus:border-stone-400"
+              className="w-full rounded-[1.3rem] border border-stone-200 bg-stone-50/85 px-4 py-3 text-base text-stone-950 outline-none transition duration-200 focus:border-amber-500 focus:bg-white"
               name="flourUnit"
               value={draft.flourUnit}
               onChange={(event) =>
@@ -325,7 +373,9 @@ export function InteractiveCalculator() {
         </div>
       </section>
 
-      <CalculatorResultPanel state={resultState} />
+      <aside className="lg:sticky lg:top-6">
+        <CalculatorResultPanel state={resultState} />
+      </aside>
     </div>
   );
 }
