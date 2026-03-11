@@ -1,41 +1,53 @@
-﻿# STATE
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: active
+last_updated: '2026-03-11T06:09:46.0476118Z'
+progress:
+  total_phases: 5
+  completed_phases: 1
+  total_plans: 1
+  completed_plans: 1
+---
+
+# STATE
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-11)
 
 **Core value:** Offrire una stima pratica del lievito fresco che sia immediata, chiara, credibile e abbastanza affidabile da poter essere usata davvero come riferimento operativo.
-**Current focus:** Phase 1 - Foundation and Quality Baseline
+**Current focus:** Phase 2 - Domain Calculation Engine
 
 ## Status
 
-- Current phase: 1
-- Current phase name: Foundation and Quality Baseline
-- Phase status: Planned
-- Plans ready: 1
-- Research complete: yes
-- Context complete: yes
-- Validation strategy complete: yes
-- Verification complete: yes
-- Requirements mapped: 18/18
+- Last completed phase: 1
+- Current phase: 2
+- Current phase name: Domain Calculation Engine
+- Phase status: Ready for context
+- Plans ready: 0
+- Completed phases: 1/5
+- Completed requirements: 2/18
+- Baseline verification: passed
 
 ## Session
 
-- Last stop: Phase 1 planned
-- Resume file: .planning/phases/01-foundation-and-quality-baseline/01-01-PLAN.md
+- Last stop: Phase 1 executed, verified, and closed
+- Resume file: .planning/ROADMAP.md
 
 ## Next Command
 
-- `$gsd-execute-phase 1`
-- Alternative: review `.planning/phases/01-foundation-and-quality-baseline/01-01-PLAN.md`
+- $gsd-discuss-phase 2
+- Alternative: $gsd-plan-phase 2
 
 ## Notes
 
 - Project is greenfield.
-- Git has been initialized.
-- Planning artifacts exist for project context, research, requirements, roadmap, state, phase context, validation, and execution plan.
-- Phase 1 remains strictly limited to engineering baseline work.
+- Git has been initialized and the repository is GitHub-ready.
+- Phase 1 established the root Next.js baseline, smoke-test harnesses, and CI enforcement.
+- Phase 2 should stay focused on domain math, normalization, validation, warnings, and practical rounding.
 - The v1 remains intentionally narrow: one trustworthy standalone calculator with future suite seams.
 
 ---
-*Last updated: 2026-03-11 after phase 1 planning*
+*Last updated: 2026-03-11 after phase 1 completion*

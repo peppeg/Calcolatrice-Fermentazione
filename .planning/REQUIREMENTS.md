@@ -1,4 +1,4 @@
-﻿# Requirements: Calcolatrice Lievitazione
+# Requirements: Calcolatrice Lievitazione
 
 **Defined:** 2026-03-11
 **Core Value:** Offrire una stima pratica del lievito fresco che sia immediata, chiara, credibile e abbastanza affidabile da poter essere usata davvero come riferimento operativo.
@@ -38,8 +38,8 @@
 
 ### Engineering Quality
 
-- [ ] **ENG-01**: Il progetto espone comandi npm chiari per lint, typecheck, unit test, integration test, e2e test e build.
-- [ ] **ENG-02**: Il repository include una CI GitHub-ready che esegue i controlli di qualita principali in modo ripetibile.
+- [x] **ENG-01**: Il progetto espone comandi npm chiari per lint, typecheck, unit test, integration test, e2e test e build.
+- [x] **ENG-02**: Il repository include una CI GitHub-ready che esegue i controlli di qualita principali in modo ripetibile.
 
 ## v2 Requirements
 
@@ -69,8 +69,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ENG-01 | Phase 1 | Pending |
-| ENG-02 | Phase 1 | Pending |
+| ENG-01 | Phase 1 | Complete |
+| ENG-02 | Phase 1 | Complete |
 | CALC-01 | Phase 2 | Pending |
 | SAFE-02 | Phase 2 | Pending |
 | SAFE-03 | Phase 2 | Pending |
@@ -92,7 +92,8 @@
 - v1 requirements: 18 total
 - Mapped to phases: 18
 - Unmapped: 0
+- Completed: 2
 
 ---
 *Requirements defined: 2026-03-11*
-*Last updated: 2026-03-11 after initial definition*
+*Last updated: 2026-03-11 after phase 1 completion*

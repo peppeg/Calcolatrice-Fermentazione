@@ -1,4 +1,4 @@
-﻿# Roadmap: Calcolatrice Lievitazione
+# Roadmap: Calcolatrice Lievitazione
 
 **Created:** 2026-03-11
 **Phases:** 5
@@ -6,13 +6,13 @@
 
 ## Roadmap Summary
 
-| Phase | Name | Goal | Requirements |
-|-------|------|------|--------------|
-| 1 | Foundation and Quality Baseline | Create the technical baseline, repository discipline, and automated quality gates for a serious v1. | ENG-01, ENG-02 |
-| 2 | Domain Calculation Engine | Implement the empirical model, normalization, validation primitives, and trustworthy numerical behavior. | CALC-01, SAFE-02, SAFE-03 |
-| 3 | Interactive Calculator Flow | Deliver the live calculator experience with robust input handling, presets, reset, and reliable result orchestration. | CALC-02, CALC-03, CALC-04, CALC-05, SAFE-01 |
-| 4 | Trust-Centered Premium Presentation | Make the tool feel premium, understandable, and honest through layout, copy, formula visibility, and polished interaction. | TRAN-01, TRAN-02, TRAN-03, UX-01, UX-02, UX-03 |
-| 5 | Experimental Modifier Seam | Add the advanced section and future-facing modifier architecture without contaminating the active MVP math. | EXP-01, EXP-02 |
+| Phase | Name | Goal | Requirements | Status |
+|-------|------|------|--------------|--------|
+| 1 | Foundation and Quality Baseline | Create the technical baseline, repository discipline, and automated quality gates for a serious v1. | ENG-01, ENG-02 | Complete (2026-03-11) |
+| 2 | Domain Calculation Engine | Implement the empirical model, normalization, validation primitives, and trustworthy numerical behavior. | CALC-01, SAFE-02, SAFE-03 | Planned |
+| 3 | Interactive Calculator Flow | Deliver the live calculator experience with robust input handling, presets, reset, and reliable result orchestration. | CALC-02, CALC-03, CALC-04, CALC-05, SAFE-01 | Planned |
+| 4 | Trust-Centered Premium Presentation | Make the tool feel premium, understandable, and honest through layout, copy, formula visibility, and polished interaction. | TRAN-01, TRAN-02, TRAN-03, UX-01, UX-02, UX-03 | Planned |
+| 5 | Experimental Modifier Seam | Add the advanced section and future-facing modifier architecture without contaminating the active MVP math. | EXP-01, EXP-02 | Planned |
 
 ## Phase Details
 
@@ -21,6 +21,10 @@
 **Goal**
 
 Create the technical baseline, repository discipline, and automated quality gates for a serious v1.
+
+**Status**
+
+Complete on 2026-03-11.
 
 **Requirements**
 
@@ -143,4 +147,4 @@ Add the advanced section and future-facing modifier architecture without contami
 **Coverage result:** 18 of 18 v1 requirements are mapped to exactly one phase.
 
 ---
-*Last updated: 2026-03-11 after roadmap creation*
+*Last updated: 2026-03-11 after phase 1 completion*
