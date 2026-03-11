@@ -9,8 +9,8 @@
 | Phase | Name | Goal | Requirements | Status |
 |-------|------|------|--------------|--------|
 | 1 | Foundation and Quality Baseline | Create the technical baseline, repository discipline, and automated quality gates for a serious v1. | ENG-01, ENG-02 | Complete (2026-03-11) |
-| 2 | Domain Calculation Engine | Implement the empirical model, normalization, validation primitives, and trustworthy numerical behavior. | CALC-01, SAFE-02, SAFE-03 | Planned |
-| 3 | Interactive Calculator Flow | Deliver the live calculator experience with robust input handling, presets, reset, and reliable result orchestration. | CALC-02, CALC-03, CALC-04, CALC-05, SAFE-01 | Planned |
+| 2 | Domain Calculation Engine | Implement the empirical model, normalization, validation primitives, and trustworthy numerical behavior. | SAFE-02, SAFE-03 | Planned |
+| 3 | Interactive Calculator Flow | Deliver the live calculator experience with robust input handling, presets, reset, and reliable result orchestration. | CALC-01, CALC-02, CALC-03, CALC-04, CALC-05, SAFE-01 | Planned |
 | 4 | Trust-Centered Premium Presentation | Make the tool feel premium, understandable, and honest through layout, copy, formula visibility, and polished interaction. | TRAN-01, TRAN-02, TRAN-03, UX-01, UX-02, UX-03 | Planned |
 | 5 | Experimental Modifier Seam | Add the advanced section and future-facing modifier architecture without contaminating the active MVP math. | EXP-01, EXP-02 | Planned |
 
@@ -46,7 +46,6 @@ Implement the empirical model, normalization, validation primitives, and trustwo
 
 **Requirements**
 
-- CALC-01
 - SAFE-02
 - SAFE-03
 
@@ -65,6 +64,7 @@ Deliver the live calculator experience with robust input handling, presets, rese
 
 **Requirements**
 
+- CALC-01
 - CALC-02
 - CALC-03
 - CALC-04
@@ -127,9 +127,9 @@ Add the advanced section and future-facing modifier architecture without contami
 |-------------|-------|
 | ENG-01 | Phase 1 |
 | ENG-02 | Phase 1 |
-| CALC-01 | Phase 2 |
 | SAFE-02 | Phase 2 |
 | SAFE-03 | Phase 2 |
+| CALC-01 | Phase 3 |
 | CALC-02 | Phase 3 |
 | CALC-03 | Phase 3 |
 | CALC-04 | Phase 3 |
@@ -147,4 +147,4 @@ Add the advanced section and future-facing modifier architecture without contami
 **Coverage result:** 18 of 18 v1 requirements are mapped to exactly one phase.
 
 ---
-*Last updated: 2026-03-11 after phase 1 completion*
+*Last updated: 2026-03-11 after phase 2 planning alignment*

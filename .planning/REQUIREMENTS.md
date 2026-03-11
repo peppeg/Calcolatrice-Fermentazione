@@ -71,7 +71,7 @@
 |-------------|-------|--------|
 | ENG-01 | Phase 1 | Complete |
 | ENG-02 | Phase 1 | Complete |
-| CALC-01 | Phase 2 | Pending |
+| CALC-01 | Phase 3 | Pending |
 | SAFE-02 | Phase 2 | Pending |
 | SAFE-03 | Phase 2 | Pending |
 | CALC-02 | Phase 3 | Pending |
@@ -97,3 +97,4 @@
 ---
 *Requirements defined: 2026-03-11*
 *Last updated: 2026-03-11 after phase 1 completion*
+
