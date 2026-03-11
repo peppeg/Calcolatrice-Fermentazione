@@ -1,0 +1,32 @@
+﻿# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+
+# Tests
+coverage/
+playwright-report/
+blob-report/
+test-results/
+
+# Temp bootstrap
+/tmp-bootstrap/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Env
+.env*
+
+# Vercel
+.vercel/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
