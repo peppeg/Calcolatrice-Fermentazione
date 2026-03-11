@@ -1,7 +1,12 @@
-export const FORMULA_BASE_COEFFICIENT = 14.5;
-export const FORMULA_TIME_EXPONENT = -0.89;
-export const FORMULA_REFERENCE_TEMPERATURE_C = 20;
-export const FORMULA_TEMPERATURE_STEP_C = 10;
+﻿export const MODEL_REFERENCE_TEMPERATURE_C = 20;
+export const MODEL_TEMPERATURE_STEP_C = 10;
+export const LONG_FERMENTATION_BASE_COEFFICIENT = 14.5;
+export const LONG_FERMENTATION_TIME_EXPONENT = -0.89;
+
+export const SHORT_TIME_BLEND_END_HOURS = 12;
+export const SHORT_TIME_BLEND_WINDOW_HOURS = 8;
+export const SHORT_TIME_BOOST_MAX = 1.37;
+export const SHORT_TIME_BOOST_EXPONENT = 1.35;
 
 export const EMPIRICAL_TEMPERATURE_RANGE_C = {
   min: 16,
@@ -9,7 +14,7 @@ export const EMPIRICAL_TEMPERATURE_RANGE_C = {
 } as const;
 
 export const EMPIRICAL_TIME_RANGE_HOURS = {
-  min: 2,
+  min: 4,
   max: 24,
 } as const;
 
