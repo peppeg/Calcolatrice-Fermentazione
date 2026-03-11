@@ -24,5 +24,5 @@ export function getValidationMessage(field: ValidationField, code: ValidationCod
 }
 
 export function getEmpiricalWarningMessage(reason: WarningReason): string {
-  return `Stai usando il modello fuori dall'intervallo empirico di riferimento (${EMPIRICAL_TEMPERATURE_RANGE_C.min}-${EMPIRICAL_TEMPERATURE_RANGE_C.max}°C, ${EMPIRICAL_TIME_RANGE_HOURS.min}-${EMPIRICAL_TIME_RANGE_HOURS.max} h): ${WARNING_REASON_LABELS[reason]}. Il risultato potrebbe essere meno affidabile.`;
+  return `Stai usando il modello fuori dall'intervallo empirico di riferimento (${EMPIRICAL_TEMPERATURE_RANGE_C.min}-${EMPIRICAL_TEMPERATURE_RANGE_C.max}Â°C, ${EMPIRICAL_TIME_RANGE_HOURS.min}-${EMPIRICAL_TIME_RANGE_HOURS.max} h): ${WARNING_REASON_LABELS[reason]}. Il risultato potrebbe essere meno affidabile.`;
 }
