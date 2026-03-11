@@ -1,0 +1,18 @@
+export const FORMULA_BASE_COEFFICIENT = 14.5;
+export const FORMULA_TIME_EXPONENT = -0.89;
+export const FORMULA_REFERENCE_TEMPERATURE_C = 20;
+export const FORMULA_TEMPERATURE_STEP_C = 10;
+
+export const EMPIRICAL_TEMPERATURE_RANGE_C = {
+  min: 16,
+  max: 36,
+} as const;
+
+export const EMPIRICAL_TIME_RANGE_HOURS = {
+  min: 2,
+  max: 24,
+} as const;
+
+export const PRACTICAL_ROUNDING_THRESHOLD_GRAMS = 1;
+export const PRACTICAL_ROUNDING_DECIMALS_AT_OR_ABOVE_THRESHOLD = 2;
+export const PRACTICAL_ROUNDING_DECIMALS_BELOW_THRESHOLD = 3;
