@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
+import { CalculatorResultPanel, type CalculatorResultState } from '@/components/calculator/calculator-result-panel';
 import { calculateFreshYeast } from '@/lib/calc/calculate-fresh-yeast';
 import {
   createInitialCalculatorDraft,
@@ -9,28 +10,29 @@ import {
   parseCalculatorDraft,
   type CalculatorDraft,
 } from '@/lib/calc/calculator-draft';
+import { roundPracticalYeast } from '@/lib/calc/rounding';
 import type { CalculationResult, ValidationField } from '@/lib/calc/types';
-import { CalculatorResultPanel, type CalculatorResultState } from '@/components/calculator/calculator-result-panel';
+import { convertFreshToDryYeastGrams } from '@/lib/calc/yeast-conversions';
 
 const PRESETS = [
   {
     id: 'calmo',
     label: 'Calma da cucina',
-    description: '20°C · 12 h',
+    description: '20Â°C Â· 12 h',
     temperatureC: '20',
     timeHours: '12',
   },
   {
     id: 'rapido',
     label: 'Impasto piu rapido',
-    description: '26°C · 6 h',
+    description: '26Â°C Â· 6 h',
     temperatureC: '26',
     timeHours: '6',
   },
   {
     id: 'lento',
     label: 'Lungo e fresco',
-    description: '18°C · 18 h',
+    description: '18Â°C Â· 18 h',
     temperatureC: '18',
     timeHours: '18',
   },
@@ -123,7 +125,7 @@ function buildResultState({
       title: 'Stima attuale',
       summary: 'La stima si aggiorna in tempo reale sui valori che stai inserendo.',
       gramsForRecipe: calculationResult.gramsForRecipe,
-      gramsPerKg: calculationResult.gramsPerKg,
+      dryYeastForRecipe: roundPracticalYeast(convertFreshToDryYeastGrams(calculationResult.gramsForRecipe)),
       warning: calculationResult.warnings[0]?.message ?? null,
     };
   }
@@ -241,7 +243,7 @@ export function InteractiveCalculator() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="space-y-2">
-            <span className="text-sm font-medium text-stone-700">Temperatura ambiente (°C)</span>
+            <span className="text-sm font-medium text-stone-700">Temperatura ambiente (Â°C)</span>
             <input
               aria-describedby={fieldErrors.temperatureC ? 'temperature-error' : undefined}
               aria-invalid={Boolean(fieldErrors.temperatureC)}

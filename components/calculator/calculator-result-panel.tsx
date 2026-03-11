@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+﻿import type { ReactNode } from 'react';
 
 export type CalculatorResultState =
   | {
@@ -18,7 +18,7 @@ export type CalculatorResultState =
       title: string;
       summary: string;
       gramsForRecipe: number;
-      gramsPerKg: number;
+      dryYeastForRecipe: number;
       warning: string | null;
     };
 
@@ -82,10 +82,11 @@ export function CalculatorResultPanel({ state }: { state: CalculatorResultState 
               </p>
             </PanelTone>
             <PanelTone>
-              <p className="text-sm text-stone-500">Valore per 1 kg di farina</p>
-              <p className="mt-2 text-3xl font-semibold tracking-tight text-stone-950" data-testid="grams-per-kg-value">
-                {formatGrams(state.gramsPerKg)} g
+              <p className="text-sm text-stone-500">Lievito secco equivalente</p>
+              <p className="mt-2 text-3xl font-semibold tracking-tight text-stone-950" data-testid="dry-yeast-for-recipe-value">
+                {formatGrams(state.dryYeastForRecipe)} g
               </p>
+              <p className="mt-2 text-xs leading-5 text-stone-500">Rapporto pratico 3,5:1 rispetto al lievito fresco.</p>
             </PanelTone>
           </div>
           {state.warning ? (

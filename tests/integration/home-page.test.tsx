@@ -1,7 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+﻿import { fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import Home from '@/app/page';
-import { calculateFreshYeast } from '@/lib/calc/calculate-fresh-yeast';
+import { calculateFreshYeast, convertFreshToDryYeastGrams, roundPracticalYeast } from '@/lib/calc';
 
 function fillCoreInputs({
   temperatureC,
@@ -12,7 +12,7 @@ function fillCoreInputs({
   timeHours: string;
   flourValue: string;
 }) {
-  fireEvent.change(screen.getByLabelText('Temperatura ambiente (°C)'), {
+  fireEvent.change(screen.getByLabelText('Temperatura ambiente (Â°C)'), {
     target: { value: temperatureC },
   });
   fireEvent.change(screen.getByLabelText('Tempo di lievitazione (ore)'), {
@@ -40,7 +40,7 @@ describe('home page calculator flow', () => {
         name: 'Una stima pratica del lievito fresco, leggibile appena inserisci i dati.',
       }),
     ).toBeInTheDocument();
-    expect(screen.getByLabelText('Temperatura ambiente (°C)')).toHaveValue('');
+    expect(screen.getByLabelText('Temperatura ambiente (Â°C)')).toHaveValue('');
     expect(
       screen.getByText(
         /Per vedere la stima, completa temperatura ambiente, tempo di lievitazione e quantita di farina/i,
@@ -61,11 +61,14 @@ describe('home page calculator flow', () => {
     });
 
     expect(expected.status).toBe('ok');
+    const expectedFresh = expected.status === 'ok' ? expected.gramsForRecipe : 0;
+    const expectedDry = roundPracticalYeast(convertFreshToDryYeastGrams(expectedFresh));
+
     expect(screen.getByTestId('grams-for-recipe-value')).toHaveTextContent(
-      `${formatGrams(expected.status === 'ok' ? expected.gramsForRecipe : 0)} g`,
+      `${formatGrams(expectedFresh)} g`,
     );
-    expect(screen.getByTestId('grams-per-kg-value')).toHaveTextContent(
-      `${formatGrams(expected.status === 'ok' ? expected.gramsPerKg : 0)} g`,
+    expect(screen.getByTestId('dry-yeast-for-recipe-value')).toHaveTextContent(
+      `${formatGrams(expectedDry)} g`,
     );
   });
 
@@ -84,11 +87,14 @@ describe('home page calculator flow', () => {
     });
 
     expect(expected.status).toBe('ok');
+    const expectedFresh = expected.status === 'ok' ? expected.gramsForRecipe : 0;
+    const expectedDry = roundPracticalYeast(convertFreshToDryYeastGrams(expectedFresh));
+
     expect(screen.getByTestId('grams-for-recipe-value')).toHaveTextContent(
-      `${formatGrams(expected.status === 'ok' ? expected.gramsForRecipe : 0)} g`,
+      `${formatGrams(expectedFresh)} g`,
     );
-    expect(screen.getByTestId('grams-per-kg-value')).toHaveTextContent(
-      `${formatGrams(expected.status === 'ok' ? expected.gramsPerKg : 0)} g`,
+    expect(screen.getByTestId('dry-yeast-for-recipe-value')).toHaveTextContent(
+      `${formatGrams(expectedDry)} g`,
     );
   });
 
@@ -96,7 +102,7 @@ describe('home page calculator flow', () => {
     render(<Home />);
     fillCoreInputs({ temperatureC: '24', timeHours: '8', flourValue: '500' });
 
-    fireEvent.change(screen.getByLabelText('Temperatura ambiente (°C)'), {
+    fireEvent.change(screen.getByLabelText('Temperatura ambiente (Â°C)'), {
       target: { value: 'vento' },
     });
 
@@ -119,6 +125,7 @@ describe('home page calculator flow', () => {
     fillCoreInputs({ temperatureC: '37', timeHours: '8', flourValue: '500' });
 
     expect(screen.getByTestId('grams-for-recipe-value')).toBeInTheDocument();
+    expect(screen.getByTestId('dry-yeast-for-recipe-value')).toBeInTheDocument();
     expect(screen.getByText(/fuori dall'intervallo empirico di riferimento/i)).toBeInTheDocument();
   });
 
@@ -133,14 +140,14 @@ describe('home page calculator flow', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /Impasto piu rapido/i }));
 
-    expect(screen.getByLabelText('Temperatura ambiente (°C)')).toHaveValue('26');
+    expect(screen.getByLabelText('Temperatura ambiente (Â°C)')).toHaveValue('26');
     expect(screen.getByLabelText('Tempo di lievitazione (ore)')).toHaveValue('6');
     expect(screen.getByLabelText('Quantita di farina')).toHaveValue('750');
     expect(screen.getByLabelText('Unita farina')).toHaveValue('kg');
 
     fireEvent.click(screen.getByRole('button', { name: /Reset completo/i }));
 
-    expect(screen.getByLabelText('Temperatura ambiente (°C)')).toHaveValue('');
+    expect(screen.getByLabelText('Temperatura ambiente (Â°C)')).toHaveValue('');
     expect(screen.getByLabelText('Tempo di lievitazione (ore)')).toHaveValue('');
     expect(screen.getByLabelText('Quantita di farina')).toHaveValue('');
     expect(screen.getByLabelText('Unita farina')).toHaveValue('g');
