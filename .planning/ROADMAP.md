@@ -1,7 +1,7 @@
 # Roadmap: Calcolatrice Lievitazione
 
 **Created:** 2026-03-11
-**Phases:** 5
+**Phases:** 6
 **v1 requirements mapped:** 18 / 18
 
 ## Roadmap Summary
@@ -83,6 +83,16 @@ Deliver the live calculator experience with robust input handling, presets, rese
 4. Presets update only the intended values, and reset restores the full initial state including advanced-panel state.
 5. Integration tests verify the default render, live updates, presets, reset, and invalid-state handling.
 
+### Phase 03.1: Empirical Model Realignment (INSERTED)
+
+**Goal:** [Urgent work - to be planned]
+**Requirements**: TBD
+**Depends on:** Phase 3
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 03.1 to break down)
+
 ### Phase 4: Trust-Centered Premium Presentation
 
 **Goal**
@@ -151,4 +161,4 @@ Add the advanced section and future-facing modifier architecture without contami
 **Coverage result:** 18 of 18 v1 requirements are mapped to exactly one phase.
 
 ---
-*Last updated: 2026-03-11 after phase 3 completion*
+*Last updated: 2026-03-11 after inserting phase 03.1*

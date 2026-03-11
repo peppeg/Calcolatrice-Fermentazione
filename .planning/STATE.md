@@ -1,11 +1,11 @@
----
+﻿---
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: active
-last_updated: '2026-03-11T10:38:45Z'
+last_updated: '2026-03-11T11:51:19Z'
 progress:
-  total_phases: 5
+  total_phases: 6
   completed_phases: 3
   total_plans: 3
   completed_plans: 3
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-11)
 
 **Core value:** Offrire una stima pratica del lievito fresco che sia immediata, chiara, credibile e abbastanza affidabile da poter essere usata davvero come riferimento operativo.
-**Current focus:** Phase 4 - Trust-Centered Premium Presentation
+**Current focus:** Phase 03.1 - Empirical Model Realignment
 
 ## Status
 
 - Last completed phase: 3
-- Current phase: 4
-- Current phase name: Trust-Centered Premium Presentation
-- Phase status: Ready for context
+- Current phase: 03.1
+- Current phase name: Empirical Model Realignment
+- Phase status: Context captured, ready for planning
 - Plans ready: 0
-- Completed phases: 3/5
+- Completed phases: 3/6
 - Completed requirements: 10/18
 - Baseline verification: passed
 - Domain verification: passed
@@ -35,13 +35,13 @@ See: .planning/PROJECT.md (updated 2026-03-11)
 
 ## Session
 
-- Last stop: Phase 3 executed, verified, and closed
-- Resume file: .planning/ROADMAP.md
+- Last stop: Captured context for Phase 03.1 after model realignment discussion
+- Resume file: .planning/phases/03.1-empirical-model-realignment/03.1-CONTEXT.md
 
 ## Next Command
 
-- $gsd-discuss-phase 4
-- Alternative: $gsd-plan-phase 4
+- $gsd-plan-phase 03.1
+- Alternative: cat .planning/phases/03.1-empirical-model-realignment/03.1-CONTEXT.md
 
 ## Notes
 
@@ -51,8 +51,15 @@ See: .planning/PROJECT.md (updated 2026-03-11)
 - Phase 2 established the pure lib/calc package with normalization, validation, warnings, rounding, and strong unit coverage.
 - Phase 3 delivered the live calculator flow with string draft-state parsing, a mounted result panel, presets/reset, and dual-surface validation feedback.
 - The homepage now exposes both recipe yeast grams and normalized grams-per-kilogram outputs, with warnings preserved on valid out-of-range input.
-- Phase 4 can focus on premium presentation, formula visibility, disclaimer copy, and trust-centered hierarchy without rebuilding the calculator flow.
+- Decision taken after formula review: v1 stays mono-model in product UX, but the architecture should be ready for multiple declared models in future phases.
+- Phase 03.1 exists to realign the calculation source of truth before Phase 4 presentation work.
+- Phase 03.1 discussion fixed the v1 direction: keep a simple time-plus-temperature active model, do not treat the social table as official truth, optimize for standard ambient use, and prioritize regular behavior over broad ambition.
 - The v1 remains intentionally narrow: one trustworthy standalone calculator with future suite seams.
 
+## Accumulated Context
+
+### Roadmap Evolution
+- Phase 03.1 inserted after Phase 3: Empirical Model Realignment (URGENT)
+
 ---
-*Last updated: 2026-03-11 after phase 3 execution*
+*Last updated: 2026-03-11 after capturing phase 03.1 context*
