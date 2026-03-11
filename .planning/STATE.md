@@ -25,7 +25,7 @@ See: .planning/PROJECT.md (updated 2026-03-11)
 - Last completed phase: 1
 - Current phase: 2
 - Current phase name: Domain Calculation Engine
-- Phase status: Ready for context
+- Phase status: Context complete
 - Plans ready: 0
 - Completed phases: 1/5
 - Completed requirements: 2/18
@@ -33,13 +33,13 @@ See: .planning/PROJECT.md (updated 2026-03-11)
 
 ## Session
 
-- Last stop: Phase 1 executed, verified, and closed
-- Resume file: .planning/ROADMAP.md
+- Last stop: Phase 2 context gathered
+- Resume file: .planning/phases/02-domain-calculation-engine/02-CONTEXT.md
 
 ## Next Command
 
-- $gsd-discuss-phase 2
-- Alternative: $gsd-plan-phase 2
+- `$gsd-plan-phase 2`
+- Alternative: review `.planning/phases/02-domain-calculation-engine/02-CONTEXT.md`
 
 ## Notes
 
@@ -51,3 +51,5 @@ See: .planning/PROJECT.md (updated 2026-03-11)
 
 ---
 *Last updated: 2026-03-11 after phase 1 completion*
+
+
