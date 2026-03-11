@@ -21,8 +21,8 @@
 
 ### Model Integrity
 
-- [ ] **MODEL-01**: Il modello attivo v1 e calibrato contro fixture esplicite e tolleranze dichiarate per l'uso standard a temperatura ambiente, cosi la sorgente numerica resta difendibile e non dipende da una formula storica non verificata.
-- [ ] **MODEL-02**: Il riallineamento del modello preserva il contratto di calcolo, i warning non bloccanti, l'andamento monotono del risultato e l'assenza di cliff evidenti nell'intervallo supportato.
+- [x] **MODEL-01**: Il modello attivo v1 e calibrato contro fixture esplicite e tolleranze dichiarate per l'uso standard a temperatura ambiente, cosi la sorgente numerica resta difendibile e non dipende da una formula storica non verificata.
+- [x] **MODEL-02**: Il riallineamento del modello preserva il contratto di calcolo, i warning non bloccanti, l'andamento monotono del risultato e l'assenza di cliff evidenti nell'intervallo supportato.
 
 ### Model Transparency
 
@@ -84,8 +84,8 @@
 | CALC-04 | Phase 3 | Complete |
 | CALC-05 | Phase 3 | Complete |
 | SAFE-01 | Phase 3 | Complete |
-| MODEL-01 | Phase 03.1 | Pending |
-| MODEL-02 | Phase 03.1 | Pending |
+| MODEL-01 | Phase 03.1 | Complete |
+| MODEL-02 | Phase 03.1 | Complete |
 | TRAN-01 | Phase 4 | Pending |
 | TRAN-02 | Phase 4 | Pending |
 | TRAN-03 | Phase 4 | Pending |
@@ -99,8 +99,8 @@
 - v1 requirements: 20 total
 - Mapped to phases: 20
 - Unmapped: 0
-- Completed: 10
+- Completed: 12
 
 ---
 *Requirements defined: 2026-03-11*
-*Last updated: 2026-03-11 after planning phase 03.1*
+*Last updated: 2026-03-11 after phase 03.1 completion*
