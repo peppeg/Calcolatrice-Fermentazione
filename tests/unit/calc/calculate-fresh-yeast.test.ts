@@ -1,37 +1,31 @@
-import { describe, expect, it } from 'vitest';
-import { calculateBaseYeastPerKg, calculateFreshYeast, roundPracticalYeast, scaleYeastToFlour } from '@/lib/calc';
+﻿import { describe, expect, it } from 'vitest';
+import { calculateFreshYeast } from '@/lib/calc';
+import { MODEL_CALIBRATION_FIXTURES } from '@/tests/unit/calc/fixtures/model-calibration-fixtures';
+
+const coreShortFixture = MODEL_CALIBRATION_FIXTURES.find((fixture) => fixture.id === 'core-20c-4h');
+
+if (!coreShortFixture) {
+  throw new Error('Missing core-20c-4h calibration fixture.');
+}
 
 describe('calculateFreshYeast', () => {
-  it('returns a rounded successful result for valid input', () => {
-    const rawGramsPerKg = calculateBaseYeastPerKg({ temperatureC: 20, timeHours: 12 });
-    const rawRecipe = scaleYeastToFlour({ gramsPerKg: rawGramsPerKg, flourGrams: 1000 });
-
-    expect(
-      calculateFreshYeast({
-        temperatureC: 20,
-        timeHours: 12,
-        flourValue: 1000,
-        flourUnit: 'g',
-      }),
-    ).toEqual({
-      status: 'ok',
-      normalizedInput: {
-        temperatureC: 20,
-        timeHours: 12,
-        flourValue: 1000,
-        flourUnit: 'g',
-        flourGrams: 1000,
-        modifiers: {
-          enabled: false,
-          values: {},
-        },
-      },
-      gramsPerKg: roundPracticalYeast(rawGramsPerKg),
-      gramsForRecipe: roundPracticalYeast(rawRecipe),
-      warnings: [],
-      errors: [],
-      appliedModifiers: [],
+  it('returns a successful result that stays within the defended short-time fixture tolerance', () => {
+    const result = calculateFreshYeast({
+      temperatureC: coreShortFixture.temperatureC,
+      timeHours: coreShortFixture.timeHours,
+      flourValue: 1000,
+      flourUnit: 'g',
     });
+
+    expect(result.status).toBe('ok');
+    if (result.status === 'ok') {
+      const relativeErrorRatio =
+        Math.abs(result.gramsPerKg - coreShortFixture.expectedGramsPerKg) /
+        coreShortFixture.expectedGramsPerKg;
+
+      expect(relativeErrorRatio).toBeLessThanOrEqual(coreShortFixture.toleranceRatio);
+      expect(result.gramsForRecipe).toBe(result.gramsPerKg);
+    }
   });
 
   it('short-circuits invalid input with no warnings', () => {
@@ -52,15 +46,15 @@ describe('calculateFreshYeast', () => {
 
   it('keeps out-of-range inputs calculable and emits one warning', () => {
     const result = calculateFreshYeast({
-      temperatureC: 40,
-      timeHours: 12,
+      temperatureC: 20,
+      timeHours: 3.5,
       flourValue: 1,
       flourUnit: 'kg',
     });
 
     expect(result.status).toBe('ok');
     expect(result.warnings).toHaveLength(1);
-    expect(result.warnings[0]?.reason).toBe('temperature');
+    expect(result.warnings[0]?.reason).toBe('time');
   });
 
   it('keeps experimental modifiers as a no-op seam', () => {

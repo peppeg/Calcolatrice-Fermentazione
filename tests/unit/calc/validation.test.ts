@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+﻿import { describe, expect, it } from 'vitest';
 import {
   buildEmpiricalRangeWarnings,
   normalizeCalculatorInput,
@@ -56,7 +56,7 @@ describe('buildEmpiricalRangeWarnings', () => {
       buildEmpiricalRangeWarnings(
         normalizeCalculatorInput({
           temperatureC: 16,
-          timeHours: 24,
+          timeHours: 4,
           flourValue: 1000,
           flourUnit: 'g',
         }),
@@ -79,7 +79,20 @@ describe('buildEmpiricalRangeWarnings', () => {
     expect(warnings[0]?.reason).toBe('temperature');
   });
 
-  it('warns when time is outside the empirical range', () => {
+  it('warns when time is below the empirical range', () => {
+    const warnings = buildEmpiricalRangeWarnings(
+      normalizeCalculatorInput({
+        temperatureC: 20,
+        timeHours: 3.9,
+        flourValue: 1000,
+        flourUnit: 'g',
+      }),
+    );
+
+    expect(warnings[0]?.reason).toBe('time');
+  });
+
+  it('warns when time is above the empirical range', () => {
     const warnings = buildEmpiricalRangeWarnings(
       normalizeCalculatorInput({
         temperatureC: 20,

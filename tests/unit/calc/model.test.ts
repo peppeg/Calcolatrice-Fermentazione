@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
+﻿import { describe, expect, it } from 'vitest';
 import { calculateBaseYeastPerKg, scaleYeastToFlour } from '@/lib/calc';
 import {
+  COMPARISON_MODEL_CALIBRATION_FIXTURES,
   CORE_MODEL_CALIBRATION_FIXTURES,
   MODEL_CALIBRATION_FIXTURES,
   type ModelCalibrationFixture,
@@ -84,6 +85,20 @@ describe('calculateBaseYeastPerKg', () => {
     expect(formatFailures(failures)).toContain('core-20c-6h');
   });
 
+  it('keeps the active runtime model within tolerance for all core fixtures', () => {
+    const failures = scoreFixtures(calculateBaseYeastPerKg, CORE_MODEL_CALIBRATION_FIXTURES);
+
+    expect(formatFailures(failures)).toBe('');
+    expect(failures).toEqual([]);
+  });
+
+  it('keeps the active runtime model within relaxed tolerance for comparison fixtures', () => {
+    const failures = scoreFixtures(calculateBaseYeastPerKg, COMPARISON_MODEL_CALIBRATION_FIXTURES);
+
+    expect(formatFailures(failures)).toBe('');
+    expect(failures).toEqual([]);
+  });
+
   it('decreases yeast when temperature rises at fixed time', () => {
     const cooler = calculateBaseYeastPerKg({ temperatureC: 20, timeHours: 12 });
     const warmer = calculateBaseYeastPerKg({ temperatureC: 25, timeHours: 12 });
@@ -114,6 +129,17 @@ describe('calculateBaseYeastPerKg', () => {
 
       expect(currentValue).toBeLessThan(previousValue);
     }
+  });
+
+  it('keeps the short-time transition continuous around 12 hours', () => {
+    const justBefore = calculateBaseYeastPerKg({ temperatureC: 20, timeHours: 11.9 });
+    const atBoundary = calculateBaseYeastPerKg({ temperatureC: 20, timeHours: 12 });
+    const justAfter = calculateBaseYeastPerKg({ temperatureC: 20, timeHours: 12.1 });
+
+    expect(justBefore).toBeGreaterThan(atBoundary);
+    expect(atBoundary).toBeGreaterThan(justAfter);
+    expect(Math.abs(justBefore - atBoundary)).toBeLessThan(0.03);
+    expect(Math.abs(atBoundary - justAfter)).toBeLessThan(0.03);
   });
 });
 
