@@ -82,11 +82,13 @@ export function CalculatorResultPanel({ state }: { state: CalculatorResultState 
               </p>
             </PanelTone>
             <PanelTone>
-              <p className="text-sm text-stone-500">Lievito secco equivalente</p>
+              <p className="text-sm text-stone-500">Lievito secco istantaneo equivalente</p>
               <p className="mt-2 text-3xl font-semibold tracking-tight text-stone-950" data-testid="dry-yeast-for-recipe-value">
                 {formatGrams(state.dryYeastForRecipe)} g
               </p>
-              <p className="mt-2 text-xs leading-5 text-stone-500">Rapporto pratico 3:1 rispetto al lievito fresco.</p>
+              <p className="mt-2 text-xs leading-5 text-stone-500">
+                Rapporto pratico 3:1 rispetto al lievito fresco. Altri prodotti secchi possono variare.
+              </p>
             </PanelTone>
           </div>
           {state.warning ? (
@@ -99,4 +101,3 @@ export function CalculatorResultPanel({ state }: { state: CalculatorResultState 
     </section>
   );
 }
-
