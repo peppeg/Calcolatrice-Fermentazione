@@ -21,21 +21,21 @@ const PRESETS = [
   {
     id: 'calmo',
     label: 'Calma da cucina',
-    description: '20 °C · 12 h',
+    description: '20 \u00B0C \u00B7 12 h',
     temperatureC: '20',
     timeHours: '12',
   },
   {
     id: 'rapido',
     label: 'Impasto piu rapido',
-    description: '26 °C · 6 h',
+    description: '26 \u00B0C \u00B7 6 h',
     temperatureC: '26',
     timeHours: '6',
   },
   {
     id: 'lento',
     label: 'Lungo e fresco',
-    description: '18 °C · 18 h',
+    description: '18 \u00B0C \u00B7 18 h',
     temperatureC: '18',
     timeHours: '18',
   },
@@ -152,7 +152,7 @@ function buildResultState({
       scenarioItems: [
         {
           label: 'Temperatura',
-          value: `${formatCompactNumber(normalizedInput.temperatureC)} °C`,
+          value: `${formatCompactNumber(normalizedInput.temperatureC)} \u00B0C`,
         },
         {
           label: 'Tempo',
@@ -164,7 +164,8 @@ function buildResultState({
         },
       ],
       estimatorName: 'Modello empirico ambiente v1',
-      estimatorNote: 'Usa temperatura e tempo per stimare il lievito; la farina scala solo il risultato finale.',
+      estimatorNote:
+        'Usa temperatura e tempo per stimare il lievito; la farina scala solo il risultato finale.',
       modifierStatus:
         calculationResult.appliedModifiers.length > 0
           ? calculationResult.appliedModifiers.join(', ')
@@ -270,12 +271,14 @@ export function InteractiveCalculator() {
                   key={preset.id}
                   type="button"
                   className={selected
-                    ? 'rounded-full border border-stone-900 bg-stone-900 px-4 py-2 text-sm font-medium text-stone-50 transition duration-200'
+                    ? 'rounded-full border border-amber-300 bg-amber-100 px-4 py-2 text-sm font-medium text-stone-950 transition duration-200'
                     : 'rounded-full border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-700 transition duration-200 hover:border-stone-300 hover:bg-stone-100'}
                   onClick={() => applyPreset(preset)}
                 >
                   {preset.label}
-                  <span className="ml-2 text-xs opacity-75">{preset.description}</span>
+                  <span className={selected ? 'ml-2 text-xs text-stone-600' : 'ml-2 text-xs text-stone-500'}>
+                    {preset.description}
+                  </span>
                 </button>
               );
             })}
@@ -291,7 +294,7 @@ export function InteractiveCalculator() {
 
         <div className="grid gap-4 sm:grid-cols-2" style={{ fontFamily: BODY_FONT }}>
           <label className="space-y-2">
-            <span className="text-sm font-medium text-stone-700">Temperatura ambiente (°C)</span>
+            <span className="text-sm font-medium text-stone-700">Temperatura ambiente ({'\u00B0'}C)</span>
             <input
               aria-describedby={fieldErrors.temperatureC ? 'temperature-error' : undefined}
               aria-invalid={Boolean(fieldErrors.temperatureC)}
@@ -373,9 +376,9 @@ export function InteractiveCalculator() {
         </div>
       </section>
 
-      <aside className="lg:sticky lg:top-6">
+      <div className="lg:sticky lg:top-6">
         <CalculatorResultPanel state={resultState} />
-      </aside>
+      </div>
     </div>
   );
 }

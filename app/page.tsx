@@ -11,7 +11,7 @@ const HERO_FACTS = [
   },
   {
     label: 'Finestra utile',
-    value: '16-36 °C · 4-24 h',
+    value: '16-36 \u00B0C \u00B7 4-24 h',
   },
   {
     label: 'Lettura pratica',
@@ -31,7 +31,7 @@ export default function Home() {
           <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)] lg:items-end">
             <div className="space-y-4">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
-                Calcolatrice della lievitazione · v1
+                Calcolatrice della lievitazione {'\u00B7'} v1
               </p>
               <div className="space-y-3">
                 <h1

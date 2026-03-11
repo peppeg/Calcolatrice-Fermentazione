@@ -52,7 +52,7 @@ export function ModelTransparencyPanel() {
             className="mt-4 overflow-x-auto rounded-[1.4rem] border border-stone-200/80 bg-white/88 px-4 py-4 text-sm leading-7 text-stone-900 sm:text-[0.95rem]"
             style={{ fontFamily: MONO_FONT }}
           >
-            Lbase = 14,5 × t^-0,89 × 2^(-((T - 20) / 10))
+            {'Lbase = 14,5 \u00D7 t^-0,89 \u00D7 2^(-((T - 20) / 10))'}
           </p>
           <p className="mt-4 text-sm leading-7 text-stone-700">
             Questa e la struttura leggibile del modello. La farina non ne cambia la forma: serve
@@ -83,7 +83,7 @@ export function ModelTransparencyPanel() {
             <div className="rounded-[1.4rem] border border-amber-200/80 bg-amber-50/80 px-4 py-4 text-amber-950">
               <p className="font-medium">Temperatura</p>
               <p>
-                {EMPIRICAL_TEMPERATURE_RANGE_C.min}-{EMPIRICAL_TEMPERATURE_RANGE_C.max} °C
+                {EMPIRICAL_TEMPERATURE_RANGE_C.min}-{EMPIRICAL_TEMPERATURE_RANGE_C.max} {'\u00B0'}C
               </p>
             </div>
             <div className="rounded-[1.4rem] border border-amber-200/80 bg-amber-50/80 px-4 py-4 text-amber-950">
