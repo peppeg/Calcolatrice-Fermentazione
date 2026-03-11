@@ -16,8 +16,8 @@
 ### Reliability and Guidance
 
 - [ ] **SAFE-01**: Utente riceve messaggi chiari per input vuoti, non validi, negativi o pari a zero e il risultato viene sospeso in modo pulito quando l'input non e calcolabile.
-- [ ] **SAFE-02**: Utente riceve un warning non bloccante quando usa il modello fuori dall'intervallo empirico di riferimento.
-- [ ] **SAFE-03**: Utente vede valori arrotondati in modo pratico per uso reale, senza falsa precisione.
+- [x] **SAFE-02**: Utente riceve un warning non bloccante quando usa il modello fuori dall'intervallo empirico di riferimento.
+- [x] **SAFE-03**: Utente vede valori arrotondati in modo pratico per uso reale, senza falsa precisione.
 
 ### Model Transparency
 
@@ -71,9 +71,9 @@
 |-------------|-------|--------|
 | ENG-01 | Phase 1 | Complete |
 | ENG-02 | Phase 1 | Complete |
+| SAFE-02 | Phase 2 | Complete |
+| SAFE-03 | Phase 2 | Complete |
 | CALC-01 | Phase 3 | Pending |
-| SAFE-02 | Phase 2 | Pending |
-| SAFE-03 | Phase 2 | Pending |
 | CALC-02 | Phase 3 | Pending |
 | CALC-03 | Phase 3 | Pending |
 | CALC-04 | Phase 3 | Pending |
@@ -92,9 +92,8 @@
 - v1 requirements: 18 total
 - Mapped to phases: 18
 - Unmapped: 0
-- Completed: 2
+- Completed: 4
 
 ---
 *Requirements defined: 2026-03-11*
-*Last updated: 2026-03-11 after phase 1 completion*
-
+*Last updated: 2026-03-11 after phase 2 completion*
