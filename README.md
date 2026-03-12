@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿# Calcolatrice Fermentazione
 
 Tool standalone in italiano per stimare il lievito di birra in una ricetta a partire da:
@@ -127,3 +128,7 @@ Il prossimo passo di planning e:
 ```txt
 $gsd-new-milestone
 ```
+=======
+# Calcolatrice-Fermentazione
+Un piccola app per calcolare, seguendo diverse formule e metodi, la quantità di lievito necessario per l'impasto della pizza.
+>>>>>>> origin/main
