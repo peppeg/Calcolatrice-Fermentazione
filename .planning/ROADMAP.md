@@ -13,7 +13,7 @@
 | 3 | Interactive Calculator Flow | Deliver the live calculator experience with robust input handling, presets, reset, and reliable result orchestration. | CALC-01, CALC-02, CALC-03, CALC-04, CALC-05, SAFE-01 | Complete (2026-03-11) |
 | 03.1 | Empirical Model Realignment | Realign the active empirical model against defendable fixtures while preserving the calculator contract and mono-model UX. | MODEL-01, MODEL-02 | Complete (2026-03-11) |
 | 4 | Trust-Centered Premium Presentation | Make the tool feel premium, understandable, and honest through layout, copy, formula visibility, and polished interaction. | TRAN-01, TRAN-02, TRAN-03, UX-01, UX-02, UX-03 | Complete (2026-03-11) |
-| 5 | Experimental Modifier Seam | Add the advanced section and future-facing modifier architecture without contaminating the active MVP math. | EXP-01, EXP-02 | Planned |
+| 5 | Experimental Modifier Seam | Add the advanced section and future-facing modifier architecture without contaminating the active MVP math. | EXP-01, EXP-02 | Complete (2026-03-12) |
 
 ## Phase Details
 
@@ -83,7 +83,7 @@ Complete on 2026-03-11.
 **Success criteria**
 
 1. Users can interact with temperature, time, flour quantity, and flour unit and see live updates without a submit button.
-2. The result area shows both recipe-scaled output and normalized per-kilogram output when input is valid.
+2. The result area shows both fresh-yeast grams for the recipe and the practical dry-yeast equivalent for the same recipe when input is valid.
 3. Invalid or incomplete input produces clear feedback and suppresses the final result cleanly instead of leaving stale answers on screen.
 4. Presets update only the intended values, and reset restores the full initial state including advanced-panel state.
 5. Integration tests verify the default render, live updates, presets, reset, and invalid-state handling.
@@ -151,6 +151,10 @@ Complete on 2026-03-11.
 
 Add the advanced section and future-facing modifier architecture without contaminating the active MVP math.
 
+**Status**
+
+Complete on 2026-03-12.
+
 **Requirements**
 
 - EXP-01
@@ -163,6 +167,9 @@ Add the advanced section and future-facing modifier architecture without contami
 3. The active calculation remains unchanged when experimental controls are present in the MVP.
 4. The app makes it obvious that these controls are heuristic placeholders for future work, not validated active math.
 5. Tests prove modifier presence does not alter base-model results in the MVP.
+**Plans**
+
+- [x] 05-01 - Experimental modifier seam with advanced accordion, typed future-factor affordances, and inactive-seam regression coverage.
 
 ## Coverage Check
 
@@ -192,4 +199,4 @@ Add the advanced section and future-facing modifier architecture without contami
 **Coverage result:** 20 of 20 v1 requirements are mapped to exactly one phase.
 
 ---
-*Last updated: 2026-03-11 after phase 4 completion*
+*Last updated: 2026-03-12 after phase 5 completion*

@@ -22,12 +22,12 @@ const HERO_FACTS = [
 export default function Home() {
   return (
     <main
-      className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(217,119,6,0.18),_transparent_26%),linear-gradient(180deg,_#f6f1e8_0%,_#f0e9df_42%,_#ebe2d6_100%)] px-4 py-6 text-stone-950 sm:px-6 lg:px-8 lg:py-10"
+      className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(204,191,172,0.18),_transparent_28%),linear-gradient(180deg,_#f5efe7_0%,_#efe8de_45%,_#e7dfd3_100%)] px-4 py-6 text-stone-950 sm:px-6 lg:px-8 lg:py-10"
       style={{ fontFamily: BODY_FONT }}
     >
       <div className="mx-auto max-w-6xl space-y-6">
-        <section className="relative overflow-hidden rounded-[2.75rem] border border-white/65 bg-white/78 p-6 shadow-[0_36px_90px_-48px_rgba(41,37,36,0.55)] backdrop-blur sm:p-8 lg:p-10">
-          <div className="absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_top,_rgba(245,158,11,0.26),_transparent_72%)]" />
+        <section className="relative overflow-hidden rounded-[2.75rem] border border-white/65 bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(250,246,240,0.82)_58%,rgba(244,236,224,0.74)_100%)] p-6 shadow-[0_36px_90px_-48px_rgba(41,37,36,0.55)] backdrop-blur sm:p-8 lg:p-10">
+          <div className="absolute right-0 top-0 h-full w-[22rem] bg-[radial-gradient(circle_at_top_right,_rgba(214,184,129,0.16),_transparent_68%)]" />
           <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)] lg:items-end">
             <div className="space-y-4">
               <p className="text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
@@ -38,11 +38,11 @@ export default function Home() {
                   className="max-w-3xl text-4xl leading-none tracking-[-0.03em] text-stone-950 sm:text-5xl lg:text-[3.8rem]"
                   style={{ fontFamily: DISPLAY_FONT }}
                 >
-                  Una stima pratica del lievito fresco, con il modello sempre leggibile.
+                  Quanto lievito ti serve, senza fare i conti a mente.
                 </h1>
                 <p className="max-w-2xl text-sm leading-7 text-stone-700 sm:text-base">
-                  Temperatura, tempo e farina bastano per leggere una stima rapida e onesta. Il
-                  risultato resta un riferimento empirico: utile in cucina, non assoluto.
+                  Dici la temperatura, il tempo e quanta farina usi, e ti diciamo quanto lievito
+                  mettere. Niente tabelle, niente alchimia. Solo un numero onesto da cui partire.
                 </p>
               </div>
             </div>
@@ -51,7 +51,7 @@ export default function Home() {
               {HERO_FACTS.map((fact) => (
                 <article
                   key={fact.label}
-                  className="rounded-[1.6rem] border border-white/70 bg-stone-950/[0.04] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)]"
+                  className="rounded-[1.6rem] border border-white/75 bg-white/64 px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] backdrop-blur"
                 >
                   <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-stone-500">
                     {fact.label}

@@ -7,12 +7,6 @@ const FIELD_LABELS: Record<ValidationField, string> = {
   flourValue: 'La quantita di farina',
 };
 
-const WARNING_REASON_LABELS: Record<WarningReason, string> = {
-  temperature: 'temperatura fuori intervallo',
-  time: 'tempo fuori intervallo',
-  'temperature-and-time': 'temperatura e tempo fuori intervallo',
-};
-
 export function getValidationMessage(field: ValidationField, code: ValidationCode): string {
   const label = FIELD_LABELS[field];
 
@@ -24,5 +18,13 @@ export function getValidationMessage(field: ValidationField, code: ValidationCod
 }
 
 export function getEmpiricalWarningMessage(reason: WarningReason): string {
-  return `Stai usando il modello fuori dall'intervallo empirico di riferimento (${EMPIRICAL_TEMPERATURE_RANGE_C.min}-${EMPIRICAL_TEMPERATURE_RANGE_C.max}°C, ${EMPIRICAL_TIME_RANGE_HOURS.min}-${EMPIRICAL_TIME_RANGE_HOURS.max} h): ${WARNING_REASON_LABELS[reason]}. Il risultato potrebbe essere meno affidabile.`;
+  if (reason === 'temperature') {
+    return "Siamo fuori dalla zona di comfort del lievito. La stima c'e, ma prendila con piu cautela del solito.";
+  }
+
+  if (reason === 'time') {
+    return `Sotto le ${EMPIRICAL_TIME_RANGE_HOURS.min} ore o sopra le ${EMPIRICAL_TIME_RANGE_HOURS.max}, il modello inizia a perdere precisione. Puoi usare il numero, ma tienilo d'occhio.`;
+  }
+
+  return `Temperatura e tempo sono fuori dalla finestra utile (${EMPIRICAL_TEMPERATURE_RANGE_C.min}-${EMPIRICAL_TEMPERATURE_RANGE_C.max}\u00B0C, ${EMPIRICAL_TIME_RANGE_HOURS.min}-${EMPIRICAL_TIME_RANGE_HOURS.max} h). La stima c'e, ma prendila con piu cautela del solito.`;
 }

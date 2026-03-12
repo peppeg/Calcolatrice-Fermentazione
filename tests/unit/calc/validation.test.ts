@@ -1,4 +1,4 @@
-﻿import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
   buildEmpiricalRangeWarnings,
   normalizeCalculatorInput,
@@ -116,6 +116,6 @@ describe('buildEmpiricalRangeWarnings', () => {
     );
 
     expect(warnings[0]?.reason).toBe('temperature-and-time');
-    expect(warnings[0]?.message).toContain('temperatura e tempo fuori intervallo');
+    expect(warnings[0]?.message).toContain('Temperatura e tempo sono fuori dalla finestra utile');
   });
 });

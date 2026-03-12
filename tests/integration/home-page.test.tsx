@@ -37,19 +37,24 @@ describe('home page calculator flow', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: 'Una stima pratica del lievito fresco, con il modello sempre leggibile.',
+        name: 'Quanto lievito ti serve, senza fare i conti a mente.',
       }),
     ).toBeInTheDocument();
     expect(screen.getByText('Formula base')).toBeInTheDocument();
     expect(
-      screen.getByText(/Il numero restituito e una stima pratica, non una verita assoluta/i),
+      screen.getByText(/Il risultato e una stima pratica, non una promessa/i),
     ).toBeInTheDocument();
     expect(screen.getByLabelText('Temperatura ambiente (\u00B0C)')).toHaveValue('');
     expect(
       screen.getByText(
-        /Per vedere la stima, completa temperatura ambiente, tempo di lievitazione e quantita di farina/i,
+        /Inserisci temperatura, tempo e farina - la stima arriva subito, senza premere niente/i,
       ),
     ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Correttivi sperimentali/i })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
+    expect(screen.queryByLabelText('Idratazione')).not.toBeInTheDocument();
   });
 
   it('updates the result live and shows trust context when input becomes valid', () => {
@@ -74,11 +79,38 @@ describe('home page calculator flow', () => {
       `${formatGrams(expectedDry)} g`,
     );
     expect(screen.getByText('Scenario attivo')).toBeInTheDocument();
-    expect(screen.getByText('Modello empirico ambiente v1')).toBeInTheDocument();
+    expect(screen.getByText('Formula semplice ambiente v1')).toBeInTheDocument();
     expect(screen.getByText('Correttivi sperimentali inattivi nella v1.')).toBeInTheDocument();
     expect(screen.getByText('24 \u00B0C')).toBeInTheDocument();
     expect(screen.getByText('8 h')).toBeInTheDocument();
     expect(screen.getByText('500 g')).toBeInTheDocument();
+  });
+
+  it('shows all experimental modifier categories and keeps the active result unchanged', () => {
+    render(<Home />);
+    fillCoreInputs({ temperatureC: '24', timeHours: '8', flourValue: '500' });
+
+    const freshBefore = screen.getByTestId('grams-for-recipe-value').textContent;
+    const dryBefore = screen.getByTestId('dry-yeast-for-recipe-value').textContent;
+
+    fireEvent.click(screen.getByRole('button', { name: /Correttivi sperimentali/i }));
+
+    expect(screen.getByLabelText('Idratazione')).toBeInTheDocument();
+    expect(screen.getByLabelText('Sale')).toBeInTheDocument();
+    expect(screen.getByLabelText('Zucchero')).toBeInTheDocument();
+    expect(screen.getByLabelText('Grassi')).toBeInTheDocument();
+    expect(screen.getByLabelText('Forza farina')).toBeInTheDocument();
+    expect(screen.getByLabelText('Fase di fermentazione')).toBeInTheDocument();
+    expect(screen.getByLabelText('Riposo in frigo')).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText('Idratazione'), {
+      target: { value: '70' },
+    });
+
+    expect(screen.getByTestId('grams-for-recipe-value')).toHaveTextContent(freshBefore ?? '');
+    expect(screen.getByTestId('dry-yeast-for-recipe-value')).toHaveTextContent(dryBefore ?? '');
+    expect(screen.getByText(/idratazione \(non applicato nella MVP\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Valori presenti ma non applicati nella v1/i)).toBeInTheDocument();
   });
 
   it('recalculates correctly when the flour unit changes and keeps the scenario summary aligned', () => {
@@ -140,10 +172,10 @@ describe('home page calculator flow', () => {
 
     expect(screen.getByTestId('grams-for-recipe-value')).toBeInTheDocument();
     expect(screen.getByTestId('dry-yeast-for-recipe-value')).toBeInTheDocument();
-    expect(screen.getByText(/fuori dall'intervallo empirico di riferimento/i)).toBeInTheDocument();
+    expect(screen.getByText(/Siamo fuori dalla zona di comfort del lievito/i)).toBeInTheDocument();
   });
 
-  it('applies presets without overwriting flour fields and resets to the initial state', () => {
+  it('resets both the core calculator and the experimental advanced state', () => {
     render(<Home />);
     fireEvent.change(screen.getByLabelText('Quantita di farina'), {
       target: { value: '750' },
@@ -153,11 +185,16 @@ describe('home page calculator flow', () => {
     });
 
     fireEvent.click(screen.getByRole('button', { name: /Impasto piu rapido/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Correttivi sperimentali/i }));
+    fireEvent.change(screen.getByLabelText('Idratazione'), {
+      target: { value: '70' },
+    });
+    fireEvent.change(screen.getByLabelText('Forza farina'), {
+      target: { value: 'media' },
+    });
+    fireEvent.click(screen.getByLabelText('Riposo in frigo'));
 
-    expect(screen.getByLabelText('Temperatura ambiente (\u00B0C)')).toHaveValue('26');
-    expect(screen.getByLabelText('Tempo di lievitazione (ore)')).toHaveValue('6');
-    expect(screen.getByLabelText('Quantita di farina')).toHaveValue('750');
-    expect(screen.getByLabelText('Unita farina')).toHaveValue('kg');
+    expect(screen.getByText(/idratazione \(non applicato nella MVP\)/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: /Reset completo/i }));
 
@@ -166,9 +203,17 @@ describe('home page calculator flow', () => {
     expect(screen.getByLabelText('Quantita di farina')).toHaveValue('');
     expect(screen.getByLabelText('Unita farina')).toHaveValue('g');
     expect(screen.queryByTestId('grams-for-recipe-value')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Correttivi sperimentali/i })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Correttivi sperimentali/i }));
+    expect(screen.getByLabelText('Idratazione')).toHaveValue(null);
+    expect(screen.getByLabelText('Forza farina')).toHaveValue('');
+    expect(screen.getByLabelText('Riposo in frigo')).not.toBeChecked();
     expect(
       screen.getByText(
-        /Per vedere la stima, completa temperatura ambiente, tempo di lievitazione e quantita di farina/i,
+        /Inserisci temperatura, tempo e farina - la stima arriva subito, senza premere niente/i,
       ),
     ).toBeInTheDocument();
   });

@@ -1,4 +1,4 @@
-﻿import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { calculateFreshYeast } from '@/lib/calc';
 import { MODEL_CALIBRATION_FIXTURES } from '@/tests/unit/calc/fixtures/model-calibration-fixtures';
 
@@ -57,7 +57,7 @@ describe('calculateFreshYeast', () => {
     expect(result.warnings[0]?.reason).toBe('time');
   });
 
-  it('keeps experimental modifiers as a no-op seam', () => {
+  it('keeps experimental modifiers as a no-op seam even when multiple placeholders are present', () => {
     const baseResult = calculateFreshYeast({
       temperatureC: 20,
       timeHours: 12,
@@ -73,6 +73,8 @@ describe('calculateFreshYeast', () => {
         enabled: true,
         values: {
           hydration: 70,
+          fermentationStage: 'mista',
+          coldRetard: true,
         },
       },
     });
@@ -80,7 +82,11 @@ describe('calculateFreshYeast', () => {
     expect(modifierResult.status).toBe('ok');
     expect(modifierResult.gramsPerKg).toBe(baseResult.status === 'ok' ? baseResult.gramsPerKg : null);
     expect(modifierResult.gramsForRecipe).toBe(baseResult.status === 'ok' ? baseResult.gramsForRecipe : null);
-    expect(modifierResult.appliedModifiers).toEqual(['idratazione (non applicato nella MVP)']);
+    expect(modifierResult.appliedModifiers).toEqual([
+      'idratazione (non applicato nella MVP)',
+      'fase di fermentazione (non applicato nella MVP)',
+      'riposo in frigo (non applicato nella MVP)',
+    ]);
   });
 
   it('stays monotonic across a small sweep of valid inputs', () => {

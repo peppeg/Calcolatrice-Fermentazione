@@ -5,7 +5,12 @@ import {
   CalculatorResultPanel,
   type CalculatorResultState,
 } from '@/components/calculator/calculator-result-panel';
+import { ExperimentalModifiersPanel } from '@/components/calculator/experimental-modifiers-panel';
 import { calculateFreshYeast } from '@/lib/calc/calculate-fresh-yeast';
+import {
+  createInactiveModifierState,
+  hasMeaningfulModifierValue,
+} from '@/lib/calc/modifiers';
 import {
   createInitialCalculatorDraft,
   formatCalculatorFieldList,
@@ -14,7 +19,14 @@ import {
   type CalculatorDraft,
 } from '@/lib/calc/calculator-draft';
 import { roundPracticalYeast } from '@/lib/calc/rounding';
-import type { CalculationResult, NormalizedCalculatorInput, ValidationField } from '@/lib/calc/types';
+import type {
+  CalculationResult,
+  ExperimentalModifierKey,
+  ExperimentalModifierState,
+  ExperimentalModifierValue,
+  NormalizedCalculatorInput,
+  ValidationField,
+} from '@/lib/calc/types';
 import { convertFreshToDryYeastGrams } from '@/lib/calc/yeast-conversions';
 
 const PRESETS = [
@@ -60,12 +72,21 @@ function formatFlourSummary(input: NormalizedCalculatorInput): string {
   return `${value} ${unitLabel}`;
 }
 
-function buildGuidanceSummary(missingFields: ValidationField[]) {
-  return `Per vedere la stima, completa ${formatCalculatorFieldList(missingFields)}.`;
+function buildGuidanceSummary() {
+  return 'Inserisci temperatura, tempo e farina - la stima arriva subito, senza premere niente.';
 }
 
 function buildInvalidSummary(fields: ValidationField[]) {
   return `Correggi ${formatCalculatorFieldList(fields)} per vedere la stima.`;
+}
+
+function buildModifierState(
+  values: ExperimentalModifierState['values'],
+): ExperimentalModifierState {
+  return {
+    enabled: Object.values(values).some((value) => hasMeaningfulModifierValue(value)),
+    values,
+  };
 }
 
 function buildFieldErrors({
@@ -114,8 +135,8 @@ function buildResultState({
   if (missingFields.length > 0) {
     return {
       variant: 'guidance',
-      title: 'Stima in attesa',
-      summary: buildGuidanceSummary(missingFields),
+      title: 'La stima arriva qui.',
+      summary: buildGuidanceSummary(),
       items: missingFields.map((field) => getCalculatorFieldLabel(field)),
     };
   }
@@ -140,11 +161,14 @@ function buildResultState({
 
   if (calculationResult?.status === 'ok') {
     const { normalizedInput } = calculationResult;
+    const modifierStatus = calculationResult.appliedModifiers.length > 0
+      ? `${calculationResult.appliedModifiers.join(', ')}. Valori presenti ma non applicati nella v1.`
+      : 'Correttivi sperimentali inattivi nella v1.';
 
     return {
       variant: 'success',
-      title: 'Stima attuale',
-      summary: 'Lettura live del modello ambiente v1 sullo scenario che stai compilando.',
+      title: 'Stima pronta',
+      summary: "Ecco il tuo punto di partenza. Poi, come sempre, decide l'impasto.",
       gramsForRecipe: calculationResult.gramsForRecipe,
       dryYeastForRecipe: roundPracticalYeast(
         convertFreshToDryYeastGrams(calculationResult.gramsForRecipe),
@@ -163,21 +187,18 @@ function buildResultState({
           value: formatFlourSummary(normalizedInput),
         },
       ],
-      estimatorName: 'Modello empirico ambiente v1',
+      estimatorName: 'Formula semplice ambiente v1',
       estimatorNote:
-        'Usa temperatura e tempo per stimare il lievito; la farina scala solo il risultato finale.',
-      modifierStatus:
-        calculationResult.appliedModifiers.length > 0
-          ? calculationResult.appliedModifiers.join(', ')
-          : 'Correttivi sperimentali inattivi nella v1.',
+        'Tiene conto di temperatura e tempo. La farina non cambia la matematica: scala solo il risultato finale.',
+      modifierStatus,
       warning: calculationResult.warnings[0]?.message ?? null,
     };
   }
 
   return {
     variant: 'guidance',
-    title: 'Stima in attesa',
-    summary: buildGuidanceSummary(['temperatureC', 'timeHours', 'flourValue']),
+    title: 'La stima arriva qui.',
+    summary: buildGuidanceSummary(),
     items: ['temperatura ambiente', 'tempo di lievitazione', 'quantita di farina'],
   };
 }
@@ -186,10 +207,17 @@ export function InteractiveCalculator() {
   const [draft, setDraft] = useState<CalculatorDraft>(() => createInitialCalculatorDraft());
   const [touchedFields, setTouchedFields] = useState<TouchedFields>({});
   const [selectedPresetId, setSelectedPresetId] = useState<string | null>(null);
+  const [experimentalOpen, setExperimentalOpen] = useState(false);
+  const [experimentalModifiers, setExperimentalModifiers] = useState<ExperimentalModifierState>(
+    () => createInactiveModifierState(),
+  );
 
   const parsedDraft = parseCalculatorDraft(draft);
   const calculationResult = parsedDraft.calculatorInput
-    ? calculateFreshYeast(parsedDraft.calculatorInput)
+    ? calculateFreshYeast({
+        ...parsedDraft.calculatorInput,
+        modifiers: experimentalModifiers,
+      })
     : null;
   const resultState = buildResultState({
     missingFields: parsedDraft.missingFields,
@@ -218,6 +246,23 @@ export function InteractiveCalculator() {
     }
   }
 
+  function updateExperimentalModifier(
+    key: ExperimentalModifierKey,
+    value: ExperimentalModifierValue,
+  ) {
+    setExperimentalModifiers((currentModifiers) => {
+      const values = { ...currentModifiers.values };
+
+      if (hasMeaningfulModifierValue(value)) {
+        values[key] = value;
+      } else {
+        delete values[key];
+      }
+
+      return buildModifierState(values);
+    });
+  }
+
   function markFieldTouched(field: ValidationField) {
     setTouchedFields((currentTouched) => ({
       ...currentTouched,
@@ -243,6 +288,8 @@ export function InteractiveCalculator() {
     setDraft(createInitialCalculatorDraft());
     setTouchedFields({});
     setSelectedPresetId(null);
+    setExperimentalOpen(false);
+    setExperimentalModifiers(createInactiveModifierState());
   }
 
   return (
@@ -253,11 +300,11 @@ export function InteractiveCalculator() {
             Input essenziali
           </p>
           <h2 className="text-2xl font-semibold tracking-tight text-stone-950">
-            Compila lo scenario, leggi subito la stima
+            Dimmi come lavori, ti dico quanto mettere.
           </h2>
           <p className="max-w-2xl text-sm leading-6 text-stone-600">
-            Nessun submit e nessun pannello superfluo: il risultato reagisce subito a temperatura,
-            tempo e farina.
+            Inserisci la temperatura di casa, per quanto tempo vuoi far lievitare e quanta farina
+            usi. Il risultato arriva subito - nessun tasto da premere, nessuna attesa.
           </p>
         </div>
 
@@ -374,6 +421,13 @@ export function InteractiveCalculator() {
             </select>
           </label>
         </div>
+
+        <ExperimentalModifiersPanel
+          isOpen={experimentalOpen}
+          modifiers={experimentalModifiers}
+          onToggle={() => setExperimentalOpen((currentOpen) => !currentOpen)}
+          onValueChange={updateExperimentalModifier}
+        />
       </section>
 
       <div className="lg:sticky lg:top-6">

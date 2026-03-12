@@ -6,18 +6,24 @@ const MONO_FONT = '"IBM Plex Mono", "SFMono-Regular", Consolas, monospace';
 const VARIABLE_CARDS = [
   {
     symbol: 'T',
-    label: 'Temperatura ambiente',
-    detail: 'Guida la velocita del modello nella cucina standard.',
+    eyebrow: 'Temperatura ambiente',
+    title: 'La variabile piu furba.',
+    detail:
+      "Il lievito odia il freddo e ama il caldo - forse troppo. Anche un paio di gradi in piu fanno una differenza seria. Misura dove metti davvero l'impasto, non quello che segna il termostato del salotto.",
   },
   {
     symbol: 't',
-    label: 'Tempo di lievitazione',
-    detail: "Riduce progressivamente il lievito richiesto quando l'impasto ha piu tempo.",
+    eyebrow: 'Tempo di lievitazione',
+    title: 'Piu aspetti, meno ne metti.',
+    detail:
+      'Il lievito lavora anche mentre tu dormi. Piu gli dai tempo, meno ne serve all\'inizio. E controintuitivo, ma funziona - e la formula lo sa gia.',
   },
   {
     symbol: 'F',
-    label: 'Farina',
-    detail: 'Non cambia la formula base: scala solo i grammi finali della ricetta.',
+    eyebrow: 'Farina',
+    title: 'Non cambia la formula, cambia la spesa.',
+    detail:
+      'La quantita di farina non tocca il modello base: serve solo a scalare il risultato sulla tua ricetta. Cosi sai esattamente quanti grammi comprare, senza avanzarne meta.',
   },
 ] as const;
 
@@ -33,12 +39,15 @@ export function ModelTransparencyPanel() {
             className="text-3xl leading-none tracking-[-0.03em] text-stone-950 sm:text-[2.4rem]"
             style={{ fontFamily: DISPLAY_FONT }}
           >
-            Formula visibile, limiti espliciti, tono sobrio.
+            Come funziona (e cosa non ti nasconde).
           </h2>
           <p className="text-sm leading-7 text-stone-700 sm:text-base">
-            La v1 usa un solo modello empirico per l&apos;uso a temperatura ambiente. La formula
-            base resta dichiarata, mentre sotto le 12 ore il tool applica un riallineamento
-            continuo sui tempi brevi per evitare sottostime poco credibili.
+            Sotto c&apos;e una formula semplice che tiene conto di temperatura e tempo. La farina non
+            cambia la matematica - serve solo a dirti quanto lievito comprare davvero.
+          </p>
+          <p className="text-sm leading-7 text-stone-600 sm:text-base">
+            Per i tempi sotto le 12 ore c&apos;e una piccola correzione automatica, perche con poco
+            tempo e facile sbagliare per difetto.
           </p>
         </div>
       </div>
@@ -55,8 +64,8 @@ export function ModelTransparencyPanel() {
             {'Lbase = 14,5 \u00D7 t^-0,89 \u00D7 2^(-((T - 20) / 10))'}
           </p>
           <p className="mt-4 text-sm leading-7 text-stone-700">
-            Questa e la struttura leggibile del modello. La farina non ne cambia la forma: serve
-            solo a scalare i grammi finali della ricetta.
+            Il risultato e una stima pratica, non una promessa. Usalo come punto di partenza, poi
+            fidati dell&apos;impasto.
           </p>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
@@ -65,10 +74,16 @@ export function ModelTransparencyPanel() {
                 key={card.symbol}
                 className="rounded-[1.4rem] border border-stone-200/75 bg-white/88 px-4 py-4"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-stone-500">
+                <p
+                  className="text-xs font-semibold tracking-[0.04em] text-stone-500"
+                  style={{ fontFamily: MONO_FONT }}
+                >
                   {card.symbol}
                 </p>
-                <p className="mt-2 text-sm font-medium text-stone-900">{card.label}</p>
+                <p className="mt-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-stone-500">
+                  {card.eyebrow}
+                </p>
+                <p className="mt-2 text-sm font-medium text-stone-900">{card.title}</p>
                 <p className="mt-2 text-sm leading-6 text-stone-600">{card.detail}</p>
               </div>
             ))}
@@ -105,12 +120,12 @@ export function ModelTransparencyPanel() {
           </p>
           <div className="mt-4 space-y-3 text-sm leading-7 text-stone-700">
             <p>
-              Il numero restituito e una stima pratica, non una verita assoluta. Serve per partire
-              con un riferimento coerente, poi va sempre confermato dall&apos;impasto reale.
+              Il numero che vedi serve per partire con un riferimento coerente, non per sostituire
+              occhio, mani e impasto.
             </p>
             <p>
               La conversione al secco resta un rapporto pratico 3:1 rispetto al fresco, pensato
-              come equivalenza rapida e non come standard universale di tutti i prodotti secchi.
+              come equivalenza rapida - non come standard universale di tutti i prodotti secchi.
             </p>
             <p className="rounded-[1.4rem] border border-stone-200/80 bg-stone-950/[0.03] px-4 py-4 text-stone-900">
               Correttivi sperimentali, frigo e variabili avanzate restano fuori dalla v1: qui il

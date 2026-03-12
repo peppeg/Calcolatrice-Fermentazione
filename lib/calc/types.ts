@@ -11,6 +11,23 @@ export type ExperimentalModifierKey =
 
 export type ExperimentalModifierValue = number | string | boolean | null;
 
+export type ExperimentalModifierControlType = 'number' | 'select' | 'toggle';
+
+export type ExperimentalModifierOption = {
+  value: string;
+  label: string;
+};
+
+export type ExperimentalModifierDefinition = {
+  key: ExperimentalModifierKey;
+  label: string;
+  description: string;
+  control: ExperimentalModifierControlType;
+  placeholder?: string;
+  suffix?: string;
+  options?: ExperimentalModifierOption[];
+};
+
 export type ExperimentalModifierState = {
   enabled: boolean;
   values: Partial<Record<ExperimentalModifierKey, ExperimentalModifierValue>>;

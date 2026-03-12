@@ -9,7 +9,7 @@
 
 - [x] **CALC-01**: Utente puo inserire temperatura ambiente, tempo di lievitazione, quantita di farina e unita della farina in un form chiaro e coerente.
 - [x] **CALC-02**: Utente ottiene un aggiornamento live del risultato senza pulsante di submit.
-- [x] **CALC-03**: Utente vede sia i grammi di lievito fresco per la ricetta sia il valore normalizzato per 1 kg di farina.
+- [x] **CALC-03**: Utente vede sia i grammi di lievito fresco per la ricetta sia l'equivalente pratico di lievito secco istantaneo per la stessa ricetta.
 - [x] **CALC-04**: Utente puo applicare preset rapidi che aggiornano solo tempo e temperatura.
 - [x] **CALC-05**: Utente puo eseguire un reset completo allo stato iniziale del tool.
 
@@ -38,8 +38,8 @@
 
 ### Experimental Extension Seam
 
-- [ ] **EXP-01**: Utente puo aprire una sezione separata dedicata ai correttivi sperimentali, chiusa di default.
-- [ ] **EXP-02**: Utente puo vedere i fattori futuri previsti dal prodotto senza che questi modifichino il calcolo attivo della MVP.
+- [x] **EXP-01**: Utente puo aprire una sezione separata dedicata ai correttivi sperimentali, chiusa di default.
+- [x] **EXP-02**: Utente puo vedere i fattori futuri previsti dal prodotto senza che questi modifichino il calcolo attivo della MVP.
 
 ### Engineering Quality
 
@@ -92,15 +92,15 @@
 | UX-01 | Phase 4 | Complete |
 | UX-02 | Phase 4 | Complete |
 | UX-03 | Phase 4 | Complete |
-| EXP-01 | Phase 5 | Pending |
-| EXP-02 | Phase 5 | Pending |
+| EXP-01 | Phase 5 | Complete |
+| EXP-02 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 20 total
 - Mapped to phases: 20
 - Unmapped: 0
-- Completed: 18
+- Completed: 20
 
 ---
 *Requirements defined: 2026-03-11*
-*Last updated: 2026-03-11 after phase 4 completion*
+*Last updated: 2026-03-12 after phase 5 completion*
