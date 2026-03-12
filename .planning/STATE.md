@@ -44,7 +44,7 @@ See: .planning/PROJECT.md (updated 2026-03-12)
 
 ## Next Command
 
-- -complete-milestone v1.0
+- $gsd-complete-milestone v1.0
 - Alternative: cat .planning/v1.0-v1.0-MILESTONE-AUDIT.md
 
 ## Notes
@@ -62,3 +62,4 @@ See: .planning/PROJECT.md (updated 2026-03-12)
 
 ---
 *Last updated: 2026-03-12 after cleanup and passed audit*
+
