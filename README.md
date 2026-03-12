@@ -121,9 +121,3 @@ La milestone `v1.0` e stata archiviata in:
 
 - [.planning/milestones/v1.0-ROADMAP.md](./.planning/milestones/v1.0-ROADMAP.md)
 - [.planning/milestones/v1.0-REQUIREMENTS.md](./.planning/milestones/v1.0-REQUIREMENTS.md)
-
-Il prossimo passo di planning e:
-
-```txt
-$gsd-new-milestone
-```
