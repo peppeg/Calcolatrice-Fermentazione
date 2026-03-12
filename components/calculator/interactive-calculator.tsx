@@ -187,7 +187,7 @@ function buildResultState({
           value: formatFlourSummary(normalizedInput),
         },
       ],
-      estimatorName: 'Formula semplice ambiente v1',
+      estimatorName: 'Formula semplice v1',
       estimatorNote:
         'Tiene conto di temperatura e tempo. La farina non cambia la matematica: scala solo il risultato finale.',
       modifierStatus,

@@ -79,7 +79,7 @@ describe('home page calculator flow', () => {
       `${formatGrams(expectedDry)} g`,
     );
     expect(screen.getByText('Scenario attivo')).toBeInTheDocument();
-    expect(screen.getByText('Formula semplice ambiente v1')).toBeInTheDocument();
+    expect(screen.getByText('Formula semplice v1')).toBeInTheDocument();
     expect(screen.getByText('Correttivi sperimentali inattivi nella v1.')).toBeInTheDocument();
     expect(screen.getByText('24 \u00B0C')).toBeInTheDocument();
     expect(screen.getByText('8 h')).toBeInTheDocument();

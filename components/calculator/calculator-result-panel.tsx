@@ -106,7 +106,7 @@ export function CalculatorResultPanel({ state }: { state: CalculatorResultState 
         <div className="space-y-4">
           <div className="grid gap-3 sm:grid-cols-2">
             <PanelTone className="bg-white">
-              <p className="text-sm text-stone-500">Lievito fresco per la ricetta</p>
+              <p className="text-sm text-stone-500">Lievito fresco</p>
               <p
                 className="mt-2 text-3xl font-semibold tracking-tight text-stone-950"
                 data-testid="grams-for-recipe-value"
@@ -115,7 +115,7 @@ export function CalculatorResultPanel({ state }: { state: CalculatorResultState 
               </p>
             </PanelTone>
             <PanelTone className="bg-white">
-              <p className="text-sm text-stone-500">Lievito secco istantaneo equivalente</p>
+              <p className="text-sm text-stone-500">Lievito secco</p>
               <p
                 className="mt-2 text-3xl font-semibold tracking-tight text-stone-950"
                 data-testid="dry-yeast-for-recipe-value"
@@ -134,7 +134,7 @@ export function CalculatorResultPanel({ state }: { state: CalculatorResultState 
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500">
                 Scenario attivo
               </p>
-              <dl className="mt-3 grid gap-3 sm:grid-cols-3">
+              <dl className="mt-3 grid gap-3">
                 {state.scenarioItems.map((item) => (
                   <div key={item.label} className="rounded-[1.3rem] border border-stone-200 bg-stone-50 px-3 py-3">
                     <dt className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-stone-500">

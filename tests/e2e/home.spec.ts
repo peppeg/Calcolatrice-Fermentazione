@@ -27,7 +27,7 @@ test('calculator flow is reachable, interactive, and accessible', async ({ page 
 
   await expect(page.getByTestId('grams-for-recipe-value')).toBeVisible();
   await expect(page.getByTestId('dry-yeast-for-recipe-value')).toBeVisible();
-  await expect(page.getByText('Formula semplice ambiente v1')).toBeVisible();
+  await expect(page.getByText('Formula semplice v1')).toBeVisible();
   await expect(page.getByText('Correttivi sperimentali inattivi nella v1.')).toBeVisible();
 
   const freshBefore = await page.getByTestId('grams-for-recipe-value').textContent();
