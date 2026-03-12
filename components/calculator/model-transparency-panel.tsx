@@ -68,20 +68,15 @@ export function ModelTransparencyPanel() {
             fidati dell&apos;impasto.
           </p>
 
-          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <div className="mt-5 grid gap-3">
             {VARIABLE_CARDS.map((card) => (
               <div
                 key={card.symbol}
                 className="rounded-[1.4rem] border border-stone-200/75 bg-white/88 px-4 py-4"
               >
-                <p
-                  className="text-xs font-semibold tracking-[0.04em] text-stone-500"
-                  style={{ fontFamily: MONO_FONT }}
-                >
-                  {card.symbol}
-                </p>
-                <p className="mt-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-stone-500">
-                  {card.eyebrow}
+                <p className="text-[0.72rem] font-semibold tracking-[0.18em] text-stone-500">
+                  <span className="uppercase">{card.eyebrow}</span>{' '}
+                  <span style={{ fontFamily: MONO_FONT }}>({card.symbol})</span>
                 </p>
                 <p className="mt-2 text-sm font-medium text-stone-900">{card.title}</p>
                 <p className="mt-2 text-sm leading-6 text-stone-600">{card.detail}</p>
